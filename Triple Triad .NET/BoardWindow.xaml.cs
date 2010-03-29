@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TripleTriad
+namespace Board
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for BoardWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class BoardWindow : Window
 	{
-		public MainWindow()
+		public BoardWindow()
 		{
 			InitializeComponent();
 		}

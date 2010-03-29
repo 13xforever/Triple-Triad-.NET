@@ -121,19 +121,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoardWindow.xaml.cs">
+      <DependentUpon>BoardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Solver\CardInfo.cs" />
     <Compile Include="Solver\Element.cs" />
     <Compile Include="Solver\PlayCard.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -302,6 +297,12 @@
     <Resource Include="Resources\gfx\rule_09.png" />
     <Resource Include="Resources\gfx\rule_10.png" />
     <Content Include="Resources\Rules.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="BoardWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
