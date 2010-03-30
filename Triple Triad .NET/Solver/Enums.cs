@@ -3,7 +3,7 @@ using System;
 namespace TripleTriad.Solver
 {
 	[Flags]
-	public enum RuleModifier
+	public enum RuleModifier: short
 	{
 		None	 = 0x00,
 		Same	 = 0x01,
@@ -13,7 +13,7 @@ namespace TripleTriad.Solver
 		Elemental= 0x10
 	}
 
-	public enum Element
+	public enum Element: short 
 	{
 		None,
 		Fire,
