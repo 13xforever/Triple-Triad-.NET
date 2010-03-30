@@ -29,5 +29,23 @@ namespace Tests
 			Assert.That(CardInfo.CardPool.ContainsKey("Squall"));
 			Assert.That(CardInfo.CardPool["Squall"].Up, Is.EqualTo(10));
 		}
+
+		[Test]
+		public void PlayHand()
+		{
+
+			PlayCard[] hand = new[]
+			                  	{
+			                  		null,
+			                  		new PlayCard(CardInfo.CardPool["Squall"], true),
+			                  		null,
+			                  		null,
+			                  	};
+		}
+		[Test]
+		public void PlayFieldConstruction()
+		{
+			var blueHand = new PlayHand()
+		}
 	}
 }

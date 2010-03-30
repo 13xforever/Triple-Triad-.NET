@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TripleTriad.Solver
 {
@@ -30,10 +31,11 @@ namespace TripleTriad.Solver
 	public class PlayHand
 	{
 		public PlayHand(){}
-		public PlayHand(List<PlayCard> hand)
+		public PlayHand(IEnumerable<PlayCard> hand, bool isBlue)
 		{
-			if (hand.Count != 5 || hand.Contains(null)) throw new ArgumentException("Invalid hand.");
-			this.hand = hand;
+			this.hand = new List<PlayCard>(hand.SkipWhile(c => c == null));
+			if (this.hand.Count != 5 || hand.Contains(null)) throw new ArgumentException("Invalid hand.");
+			this.isBlue = isBlue;
 		}
 
 		public int RemainingCards { get { return hand.Count; } }
@@ -44,8 +46,16 @@ namespace TripleTriad.Solver
 
 	public class PlayCard
 	{
+		public PlayCard(){}
+		public PlayCard(CardInfo cardInfo, bool isBlue)
+		{
+			this.cardInfo = cardInfo;
+			this.isBlue = isBlue;
+			inUse = false;
+		}
+
 		public CardInfo cardInfo;
-		public bool inUse;
 		public bool isBlue;
+		public bool inUse;
 	}
 }

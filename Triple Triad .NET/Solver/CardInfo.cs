@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 
 namespace TripleTriad.Solver
@@ -10,19 +10,19 @@ namespace TripleTriad.Solver
 	public class CardInfo
 	{
 		private static readonly Dictionary<string, CardInfo> cardPool;
-		private byte down;
-		private Element element;
-		private byte id;
-		private byte left;
-		private string name;
-		private byte right;
-		private byte up;
+		private readonly byte down;
+		private readonly Element element;
+		private readonly byte id;
+		private readonly byte left;
+		private readonly string name;
+		private readonly byte right;
+		private readonly byte up;
 
 		static CardInfo()
 		{
 			cardPool = new Dictionary<string, CardInfo>(StringComparer.InvariantCultureIgnoreCase);
-			var currentAssembly = Assembly.GetExecutingAssembly();
-			var resourceName = currentAssembly.GetManifestResourceNames().Single(s => s.EndsWith("cards.xml", StringComparison.InvariantCultureIgnoreCase));
+			Assembly currentAssembly = Assembly.GetExecutingAssembly();
+			string resourceName = currentAssembly.GetManifestResourceNames().Single(s => s.EndsWith("cards.xml", StringComparison.InvariantCultureIgnoreCase));
 			var xml = new XmlDocument();
 			xml.Load(currentAssembly.GetManifestResourceStream(resourceName));
 			foreach (XmlElement card in xml.DocumentElement.ChildNodes)
@@ -48,6 +48,7 @@ namespace TripleTriad.Solver
 			this.down = byte.Parse(down, NumberStyles.HexNumber);
 			if (!Enum.TryParse(element, out this.element)) throw new ArgumentException("Can't parse value.", "element");
 		}
+
 		public CardInfo(byte id, string name, byte left, byte up, byte right, byte down, Element element)
 		{
 			this.id = id;
@@ -84,7 +85,7 @@ namespace TripleTriad.Solver
 		{
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
-			return obj.GetType() == typeof (CardInfo) && Equals((CardInfo) obj);
+			return obj.GetType() == typeof (CardInfo) && Equals((CardInfo)obj);
 		}
 
 		public bool Equals(CardInfo other)
