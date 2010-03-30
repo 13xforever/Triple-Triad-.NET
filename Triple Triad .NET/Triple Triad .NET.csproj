@@ -131,6 +131,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Solver\PlayField.cs" />
+    <Compile Include="Solver\PlayHand.cs" />
+    <Compile Include="Solver\State.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

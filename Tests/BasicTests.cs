@@ -37,15 +37,18 @@ namespace Tests
 			PlayCard[] hand = new[]
 			                  	{
 			                  		null,
-			                  		new PlayCard(CardInfo.CardPool["Squall"], true),
-			                  		null,
-			                  		null,
+			                  		new PlayCard(CardInfo.CardPool["Squall"]),
+									null, null,
+			                  		new PlayCard(CardInfo.CardPool["Squall"]),
+			                  		new PlayCard(CardInfo.CardPool["Squall"]),
+			                  		new PlayCard(CardInfo.CardPool["Squall"]),
+			                  		new PlayCard(CardInfo.CardPool["Squall"]),
 			                  	};
+			Assert.That(new PlayHand(hand, true).RemainingCards, Is.EqualTo(5));
 		}
 		[Test]
 		public void PlayFieldConstruction()
 		{
-			var blueHand = new PlayHand()
 		}
 	}
 }
