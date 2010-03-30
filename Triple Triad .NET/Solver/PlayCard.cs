@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace TripleTriad.Solver
@@ -31,10 +32,13 @@ namespace TripleTriad.Solver
 		public PlayHand(){}
 		public PlayHand(List<PlayCard> hand)
 		{
+			if (hand.Count != 5 || hand.Contains(null)) throw new ArgumentException("Invalid hand.");
 			this.hand = hand;
 		}
 
-		public bool our;
+		public int RemainingCards { get { return hand.Count; } }
+
+		public bool isBlue;
 		public List<PlayCard> hand;
 	}
 
@@ -42,6 +46,6 @@ namespace TripleTriad.Solver
 	{
 		public CardInfo cardInfo;
 		public bool inUse;
-		public bool our;
+		public bool isBlue;
 	}
 }

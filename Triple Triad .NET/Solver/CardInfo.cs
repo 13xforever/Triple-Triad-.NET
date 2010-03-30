@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Linq;
 using System.Xml;
@@ -39,13 +40,13 @@ namespace TripleTriad.Solver
 
 		private CardInfo(string id, string name, string left, string up, string right, string down, string element)
 		{
-			byte.TryParse(id, out this.id);
 			this.name = name;
-			byte.TryParse(left, out this.left);
-			byte.TryParse(up, out this.up);
-			byte.TryParse(right, out this.right);
-			byte.TryParse(down, out this.down);
-			Element.TryParse(element, out this.element);
+			if (!byte.TryParse(id, out this.id)) throw new ArgumentException("Can't parse value.", "id");
+			if (!byte.TryParse(left, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out this.left)) throw new ArgumentException("Can't parse value.", "left");
+			if (!byte.TryParse(up, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out this.up)) throw new ArgumentException("Can't parse value.", "up");
+			if (!byte.TryParse(right, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out this.right)) throw new ArgumentException("Can't parse value.", "right");
+			if (!byte.TryParse(down, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out this.down)) throw new ArgumentException("Can't parse value.", "down");
+			if (!Element.TryParse(element, out this.element)) throw new ArgumentException("Can't parse value.", "element");
 		}
 		public CardInfo(byte id, string name, byte left, byte up, byte right, byte down, Element element)
 		{

@@ -27,6 +27,7 @@ namespace Tests
 		{
 			Assert.That(CardInfo.CardPool.Count, Is.EqualTo(110));
 			Assert.That(CardInfo.CardPool.ContainsKey("Squall"));
+			Assert.That(CardInfo.CardPool["Squall"].Up, Is.EqualTo(10));
 		}
 	}
 }
