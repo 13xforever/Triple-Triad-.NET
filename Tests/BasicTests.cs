@@ -39,16 +39,33 @@ namespace Tests
 			                  		null,
 			                  		new PlayCard(CardInfo.CardPool["Squall"]),
 									null, null,
-			                  		new PlayCard(CardInfo.CardPool["Squall"]),
-			                  		new PlayCard(CardInfo.CardPool["Squall"]),
-			                  		new PlayCard(CardInfo.CardPool["Squall"]),
-			                  		new PlayCard(CardInfo.CardPool["Squall"]),
+			                  		new PlayCard(CardInfo.CardPool["Krysta"]),
+			                  		new PlayCard(CardInfo.CardPool["Wendigo"]),
+			                  		new PlayCard(CardInfo.CardPool["Behemoth"]),
+			                  		new PlayCard(CardInfo.CardPool["Tonberry"]),
 			                  	};
 			Assert.That(new PlayHand(hand, true).RemainingCards, Is.EqualTo(5));
 		}
 		[Test]
 		public void PlayFieldConstruction()
 		{
+			PlayHand blueHand = new PlayHand(new[]
+			                  	{
+			                  		new PlayCard(CardInfo.CardPool["Squall"]),
+			                  		new PlayCard(CardInfo.CardPool["Krysta"]),
+			                  		new PlayCard(CardInfo.CardPool["Wendigo"]),
+			                  		new PlayCard(CardInfo.CardPool["Behemoth"]),
+			                  		new PlayCard(CardInfo.CardPool["Tonberry"]),
+			                  	}, true);
+			PlayHand redHand = new PlayHand(new[]
+			                  	{
+			                  		new PlayCard(CardInfo.CardPool["Torama"]),
+			                  		new PlayCard(CardInfo.CardPool["Gerogero"]),
+			                  		new PlayCard(CardInfo.CardPool["Buel"]),
+			                  		new PlayCard(CardInfo.CardPool["Bomb"]),
+			                  		new PlayCard(CardInfo.CardPool["Diablos"]),
+			                  	}, false);
+			State state = new State(new PlayField(), RuleModifier.None, blueHand, redHand, true);
 		}
 	}
 }
