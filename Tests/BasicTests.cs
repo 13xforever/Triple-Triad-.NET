@@ -36,7 +36,7 @@ namespace Tests
 			var playCard = new PlayCard(CardInfo.CardPool["Squall"], true);
 			Assert.That(playCard.isBlue);
 			playCard.Flip();
-			Assert.That(!playCard.isBlue);
+			Assert.That(playCard.isBlue, Is.False);
 		}
 
 		[Test]
@@ -51,6 +51,18 @@ namespace Tests
 			                  		new PlayCard(CardInfo.CardPool["Tonberry"]),
 			                  	}, true);
 			Assert.That(hand.hand.Count, Is.EqualTo(5));
+
+			var arrayOfStructs = new PlayCard[] {new PlayCard(CardInfo.CardPool["Squall"])};
+			Assert.That(arrayOfStructs[0].isBlue, Is.False);
+			arrayOfStructs[0].Flip();
+			Assert.That(arrayOfStructs[0].isBlue);
+
+			var clonedHand = hand.Clone();
+			Assert.That(clonedHand.hand[0].isBlue, Is.EqualTo(hand.hand[0].isBlue));
+
+			hand.hand[0].Flip();
+			clonedHand.hand[0].Flip();
+			Assert.That(clonedHand.hand[0].isBlue, Is.Not.EqualTo(hand.hand[0].isBlue));
 		}
 
 		[Test]
@@ -71,7 +83,7 @@ namespace Tests
 			Assert.That(field.cell[0, 0].card.cardInfo, Is.EqualTo(field2.cell[0, 0].card.cardInfo));
 			Assert.That(field.cell[0, 0].card.isBlue, Is.EqualTo(field2.cell[0, 0].card.isBlue));
 
-			((PlayCard)field2.cell[0, 0].card).Flip();
+			field2.cell[0, 0].card.Flip();
 			Assert.That(field.cell[0, 0].card.isBlue, Is.Not.EqualTo(field2.cell[0, 0].card.isBlue));
 
 			field2.cell[0, 0].card = new PlayCard(CardInfo.CardPool["Bomb"]);

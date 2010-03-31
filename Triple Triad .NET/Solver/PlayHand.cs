@@ -6,13 +6,17 @@ namespace TripleTriad.Solver
 {
 	public class PlayHand
 	{
-		public PlayHand(){}
 		public PlayHand(IEnumerable<PlayCard> hand, bool isBlue)
 		{
 			this.hand = new List<PlayCard>(hand);
 			if (this.hand.Count != 5) throw new ArgumentException("Invalid hand.");
 			this.isBlue = isBlue;
 			this.hand.ForEach(c => c.isBlue = isBlue);
+		}
+
+		public PlayHand Clone()
+		{
+			return new PlayHand(hand, isBlue);
 		}
 
 		public int RemainingCards { get { return hand.Count; } }
