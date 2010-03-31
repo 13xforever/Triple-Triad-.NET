@@ -125,7 +125,8 @@
       <DependentUpon>BoardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Solver\CardInfo.cs" />
-    <Compile Include="Solver\Element.cs" />
+    <Compile Include="Solver\Enums.cs" />
+    <Compile Include="Solver\FieldCell.cs" />
     <Compile Include="Solver\PlayCard.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
