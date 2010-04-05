@@ -81,6 +81,15 @@ namespace Tests
 			                           		new PlayCard(CardInfo.CardPool["Diablos"]),
 			                           	}, false);
 			var state = new State(new PlayField(), RuleModifier.None, blueHand, redHand, true);
+
+			Assert.That(state.bluePoints, Is.EqualTo(5));
+			state.bluePoints--;
+			Assert.That(state.bluePoints, Is.EqualTo(4));
+			var clone = state.Clone();
+			Assert.That(clone.bluePoints, Is.EqualTo(4));
+			clone.bluePoints--;
+			Assert.That(state.bluePoints, Is.EqualTo(4));
+			Assert.That(clone.bluePoints, Is.EqualTo(3));
 		}
 
 		[Test]

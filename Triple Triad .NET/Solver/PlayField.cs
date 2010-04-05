@@ -1,5 +1,10 @@
 ﻿namespace TripleTriad.Solver
 {
+	/// <summary>
+	/// <remarks>
+	/// (0,0) corresponds to lower left corner
+	/// </remarks>
+	/// </summary>
 	public class PlayField
 	{
 		public FieldCell[,] cell;
