@@ -2,7 +2,7 @@
 {
 	/// <summary>
 	/// <remarks>
-	/// (0,0) corresponds to lower left corner
+	/// (0,0) corresponds to upper left corner
 	/// </remarks>
 	/// </summary>
 	public class PlayField
@@ -13,15 +13,15 @@
 		public PlayField()
 		{
 			cell = new FieldCell[3,3];
-			for (int i = 0; i < cell.GetLength(0); i++)
-				for (int j = 0; j < cell.GetLength(1); j++)
+			for (int x = 0; x < cell.GetLength(0); x++)
+				for (int y = 0; y < cell.GetLength(1); y++)
 				{
 					var c = new FieldCell();
-					if (i == 0) c.left = 10;
-					if (j == 0) c.up = 10;
-					if (i == cell.Length) c.right = 10;
-					if (j == cell.Length) c.down = 10;
-					cell[i, j] = c;
+					if (x == 0) c.left = 10;
+					if (y == 0) c.up = 10;
+					if (x == cell.Length) c.right = 10;
+					if (y == cell.Length) c.down = 10;
+					cell[x, y] = c;
 				}
 		}
 
