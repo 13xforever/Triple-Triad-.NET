@@ -8,10 +8,10 @@ namespace TripleTriad.Solver
 	{
 		public PlayHand(IEnumerable<PlayCard> hand, bool isBlue)
 		{
-			this.hand = new List<PlayCard>(hand);
-			if (this.hand.Count != 5) throw new ArgumentException("Invalid hand.");
+			this.hand = hand.ToArray();
+			if (this.hand.Length != 5) throw new ArgumentException("Invalid hand.");
 			this.isBlue = isBlue;
-			this.hand.ForEach(c => c.isBlue = isBlue);
+			for (var i = 0; i < this.hand.Length; i++) this.hand[i].isBlue = isBlue;
 		}
 
 		public PlayHand Clone()
@@ -19,9 +19,9 @@ namespace TripleTriad.Solver
 			return new PlayHand(hand, isBlue);
 		}
 
-		public int RemainingCards { get { return hand.Count; } }
+		public int RemainingCards { get { return hand.Length; } }
 
 		public bool isBlue;
-		public List<PlayCard> hand;
+		public PlayCard[] hand;
 	}
 }
