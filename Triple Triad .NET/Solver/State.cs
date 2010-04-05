@@ -5,6 +5,14 @@ namespace TripleTriad.Solver
 {
 	public class State
 	{
+		private readonly PlayHand blueHand;
+		private readonly bool bluesTurn;
+		private readonly PlayField field;
+		private readonly PlayHand redHand;
+		public byte bluePoints;
+		public RuleModifier modifiers;
+		public byte redPoints;
+
 		public State(PlayField field, RuleModifier modifiers, PlayHand blueHand, PlayHand redHand, bool bluesTurn)
 		{
 			this.field = field.Clone();
@@ -24,27 +32,21 @@ namespace TripleTriad.Solver
 			if (!hand.hand.Any(c => c.cardInfo == card))
 				throw new ArgumentException("There's no such a card in playing hand.", "card");
 
-			var newState = Clone();
-			
-			return newState;
+			return MakeMove(Clone(), hand.Extract(card));
 		}
 
 		public State Clone()
 		{
 			return new State(field, modifiers, blueHand, redHand, bluesTurn)
 			       	{
-			       		bluePoints = bluePoints, 
-			       		redPoints = redPoints
+			       		bluePoints = bluePoints,
+			       		redPoints = redPoints,
 			       	};
 		}
 
-
-		public byte bluePoints;
-		public byte redPoints;
-		private PlayField field;
-		private PlayHand blueHand;
-		private PlayHand redHand;
-		private bool bluesTurn;
-		public RuleModifier modifiers;
+		private static State MakeMove(State state, PlayCard playCard)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
