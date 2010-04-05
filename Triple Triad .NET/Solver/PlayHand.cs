@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TripleTriad.Util;
 
 namespace TripleTriad.Solver
 {
@@ -23,5 +24,23 @@ namespace TripleTriad.Solver
 
 		public bool isBlue;
 		public PlayCard[] hand;
+
+		public PlayCard Extract(CardInfo cardInfo)
+		{
+			byte i = 0;
+			while (hand[i].cardInfo != cardInfo) i++;
+			return Extract(i);
+		}
+
+		public PlayCard Extract(byte positionInHand)
+		{
+			if (RemainingCards == 0) throw new InvalidOperationException("Hand is empty.");
+			if (RemainingCards < positionInHand+1) throw new ArgumentException("Too few cards in hand.", "positionInHand");
+
+			PlayCard result = hand[positionInHand];
+			result.inUse = true;
+			hand = hand.CopyExceptElementAt(positionInHand);
+			return result;
+		}
 	}
 }

@@ -135,6 +135,7 @@
     <Compile Include="Solver\PlayField.cs" />
     <Compile Include="Solver\PlayHand.cs" />
     <Compile Include="Solver\State.cs" />
+    <Compile Include="Util\ArrayUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

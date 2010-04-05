@@ -101,7 +101,7 @@ namespace Tests
 			                        		new PlayCard(CardInfo.CardPool["Krysta"]),
 			                        		new PlayCard(CardInfo.CardPool["Wendigo"]),
 			                        		new PlayCard(CardInfo.CardPool["Behemoth"]),
-			                        		new PlayCard(CardInfo.CardPool["Tonberry"]),
+			                        		new PlayCard(CardInfo.CardPool["Wendigo"]),
 			                        	}, true);
 			Assert.That(hand.RemainingCards, Is.EqualTo(5));
 
@@ -115,6 +115,21 @@ namespace Tests
 
 			clonedHand.hand[0].Flip();
 			Assert.That(clonedHand.hand[0].isBlue, Is.Not.EqualTo(hand.hand[0].isBlue));
+
+			Assert.That(hand.RemainingCards, Is.EqualTo(5));
+			Assert.That(hand.hand[2].cardInfo, Is.EqualTo(CardInfo.CardPool["Wendigo"]));
+			Assert.That(hand.hand[2].inUse, Is.False);
+
+			var card = hand.Extract(CardInfo.CardPool["Wendigo"]);
+			Assert.That(hand.RemainingCards, Is.EqualTo(4));
+			Assert.That(hand.hand[2].cardInfo, Is.EqualTo(CardInfo.CardPool["Behemoth"]));
+			Assert.That(card.cardInfo, Is.EqualTo(CardInfo.CardPool["Wendigo"]));
+			Assert.That(card.inUse);
+			card = hand.Extract(1);
+			Assert.That(hand.RemainingCards, Is.EqualTo(3));
+			Assert.That(hand.hand[2].cardInfo, Is.EqualTo(CardInfo.CardPool["Wendigo"]));
+			Assert.That(card.cardInfo, Is.EqualTo(CardInfo.CardPool["Krysta"]));
+			Assert.That(card.inUse);
 		}
 	}
 }
