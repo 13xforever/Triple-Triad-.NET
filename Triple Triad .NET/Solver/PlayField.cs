@@ -7,8 +7,9 @@
 	/// </summary>
 	public class PlayField
 	{
-		public FieldCell[,] cell;
-		public Element[,] element;
+		private FieldCell[,] cell;
+
+		public FieldCell this[byte x, byte y] { get { return cell[x, y]; } set { cell[x, y] = value; } }
 
 		public PlayField()
 		{
@@ -25,9 +26,17 @@
 				}
 		}
 
+		public void Put(PlayCard card, byte x, byte y)
+		{
+			cell[x, y].card = card;
+			if (x > 0) cell[x - 1, y].right = card.cardInfo.Left;
+			if (x < cell.Length) cell[x + 1, y].left = card.cardInfo.Right;
+			if (y > 0) cell[x, y - 1].down = card.cardInfo.Up;
+			if (y < cell.Length) cell[x, y + 1].up = card.cardInfo.Down;
+		}
+
 		private PlayField(PlayField playField)
 		{
-			element = playField.element;
 			cell = (FieldCell[,]) playField.cell.Clone();
 		}
 
