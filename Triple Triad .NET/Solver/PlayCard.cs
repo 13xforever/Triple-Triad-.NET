@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace TripleTriad.Solver
 {
+	[DebuggerDisplay("{cardInfo.name}")]
 	public struct PlayCard
 	{
 		public PlayCard(CardInfo cardInfo)

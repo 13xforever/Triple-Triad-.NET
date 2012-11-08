@@ -10,7 +10,7 @@ namespace TripleTriad.Solver
 		public PlayHand(IEnumerable<PlayCard> hand, bool isBlue)
 		{
 			this.hand = hand.ToArray();
-			if (this.hand.Length != 5) throw new ArgumentException("Invalid hand.");
+			//if (this.hand.Length != 5) throw new ArgumentException("Invalid hand.");
 			this.isBlue = isBlue;
 			for (var i = 0; i < this.hand.Length; i++) this.hand[i].isBlue = isBlue;
 		}

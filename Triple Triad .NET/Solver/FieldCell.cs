@@ -7,7 +7,6 @@
 		public byte right;
 		public byte down;
 		public PlayCard card;
-		public bool isWall;
 		public Element element;
 
 		public bool Occupied { get { return card.cardInfo != null; } }

@@ -6,7 +6,7 @@ namespace TripleTriad.Solver
 	public class State
 	{
 		private readonly PlayHand blueHand;
-		private readonly bool bluesTurn;
+		private bool bluesTurn;
 		private readonly PlayField field;
 		private readonly PlayHand redHand;
 		public byte bluePoints;
@@ -31,11 +31,13 @@ namespace TripleTriad.Solver
 			PlayHand hand = bluesTurn ? blueHand : redHand;
 			if (!hand.hand.Any(c => Equals(c.cardInfo, card)))
 				throw new ArgumentException("There's no such a card in playing hand.", "card");
-			var result = Clone();
 
+			var result = Clone();
+			hand = result.bluesTurn ? result.blueHand : result.redHand;
 			var playCard = hand.Extract(card);
 			result.field.Put(playCard, x, y);
-			return MakeMove(result, playCard, x, y);
+			result.bluesTurn = !result.bluesTurn;
+			return UpdateStateAfterMove(result, x, y);
 		}
 
 		public State Clone()
@@ -50,9 +52,24 @@ namespace TripleTriad.Solver
 		public bool GameIsOver { get { return blueHand.RemainingCards + redHand.RemainingCards == 1; } }
 		public int Balance { get { return redPoints - bluePoints; } }
 
-		private static State MakeMove(State state, PlayCard playCard, byte x, byte y)
+		private State UpdateStateAfterMove(State newState, byte x, byte y)
 		{
-			throw new NotImplementedException();
+			var sameConnections = 0;
+			var cell = newState.field.cell[x, y];
+			if (cell.up == cell.card.cardInfo.Up && y > 0) sameConnections++;
+			if (cell.down == cell.card.cardInfo.Down && y < PlayField.maxCoord) sameConnections++;
+			if (cell.left == cell.card.cardInfo.Left && x>0) sameConnections++;
+			if (cell.right == cell.card.cardInfo.Right && x < PlayField.maxCoord) sameConnections++;
+
+			if (sameConnections > 1)
+			{
+				if (cell.up == cell.card.cardInfo.Up && y > 0) newState.field.cell[x, y - 1].card.Flip();
+				if (cell.down == cell.card.cardInfo.Down && y < PlayField.maxCoord) newState.field.cell[x, y + 1].card.Flip();
+				if (cell.left == cell.card.cardInfo.Left && x > 0) newState.field.cell[x - 1, y].card.Flip();
+				if (cell.right == cell.card.cardInfo.Right && x < PlayField.maxCoord) newState.field.cell[x + 1, y].card.Flip();
+			}
+
+			return newState;
 		}
 
 		public override bool Equals(object obj)
