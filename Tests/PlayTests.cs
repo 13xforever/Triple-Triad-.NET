@@ -29,39 +29,39 @@ namespace Tests
 
 			//Turn 1
 			var playCard = blueHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 1, 1);
+			state = state.PlayCard(playCard, 0, 0);
 
 			//Turn 2
 			playCard = redHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 2, 1);
+			state = state.PlayCard(playCard, 1, 0);
 
 			//Turn 3
 			playCard = blueHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 3, 1);
+			state = state.PlayCard(playCard, 2, 0);
 
 			//Turn 4
 			playCard = redHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 1, 2);
+			state = state.PlayCard(playCard, 0, 1);
 
 			//Turn 5
 			playCard = blueHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 2, 2);
+			state = state.PlayCard(playCard, 1, 1);
 
 			//Turn 6
 			playCard = redHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 3, 2);
+			state = state.PlayCard(playCard, 2, 1);
 
 			//Turn 7
 			playCard = blueHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 1, 3);
+			state = state.PlayCard(playCard, 0, 2);
 
 			//Turn 8
 			playCard = redHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 2, 3);
+			state = state.PlayCard(playCard, 1, 2);
 
 			//Turn 9
 			playCard = blueHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 3, 3);
+			state = state.PlayCard(playCard, 2, 2);
 
 			Assert.That(state.GameIsOver);
 			Assert.That(state.Balance, Is.EqualTo(2));

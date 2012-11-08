@@ -7,9 +7,7 @@
 	/// </summary>
 	public class PlayField
 	{
-		private FieldCell[,] cell;
-
-		public FieldCell this[byte x, byte y] { get { return cell[x, y]; } set { cell[x, y] = value; } }
+		public FieldCell[,] cell;
 
 		public PlayField()
 		{

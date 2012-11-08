@@ -26,7 +26,7 @@ namespace TripleTriad.Solver
 
 		public State PlayCard(CardInfo card, byte x, byte y)
 		{
-			if (field[x, y].Occupied)
+			if (field.cell[x, y].Occupied)
 				throw new InvalidOperationException(string.Format("Cannot play card to ({0},{1}) because this cell is already occupied.", x, y));
 			PlayHand hand = bluesTurn ? blueHand : redHand;
 			if (!hand.hand.Any(c => Equals(c.cardInfo, card)))
