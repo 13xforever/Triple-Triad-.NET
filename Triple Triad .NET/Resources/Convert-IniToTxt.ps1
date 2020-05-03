@@ -1,8 +1,5 @@
 $ini = Get-Content Cards.ini
-$xml = New-Object xml
-$root = $xml.CreateElement("cards")
-[Void]$xml.AppendChild($root)
-
+$txt = ''
 $elements = @('', '🔥', '❄', '⚡', '💧', '🌪', '⛰', '☣', '✨')
 
 for ($i = 0; $i -lt 110; $i++)
@@ -32,16 +29,7 @@ for ($i = 0; $i -lt 110; $i++)
 	$elementParam = $elementParam[$elementParam.Length - 1]
 	$elementParam = $elements[([int]::Parse($elementParam))]
 	
-	
-	$node = $xml.CreateElement("card")
-	$node.SetAttribute("id", $i)
-	$node.SetAttribute("name", $cardName)
-	$node.SetAttribute("left", $leftParam)
-	$node.SetAttribute("up", $upParam)
-	$node.SetAttribute("right", $rightParam)
-	$node.SetAttribute("down", $downParam)
-	$node.SetAttribute("element", $elementParam)
-	$root.AppendChild($node)
+	$txt += "$upParam$rightParam$downParam$leftParam$elementParam	$cardName" + [Environment]::NewLine
 }
 
-$xml.Save("Cards.xml")
+$txt.TrimEnd() | Set-Content Cards.txt -Encoding utf8BOM

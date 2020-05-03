@@ -17,28 +17,28 @@ namespace Tests
 			Assert.That(testArray.CopyExceptElementAt(9), Is.EqualTo(new[] {0, 1, 2, 3, 4, 5, 6, 7, 8}));
 		}
 
-		[Test, ExpectedException(typeof (IndexOutOfRangeException))]
+		[Test]
 		public void ArrayUtilArgumentException()
 		{
-			(new[] {0}).CopyExceptElementAt(1);
+			Assert.That(() => new[] {0}.CopyExceptElementAt(1), Throws.InstanceOf<IndexOutOfRangeException>());
 		}
 
-		[Test, ExpectedException(typeof (ArgumentNullException))]
+		[Test]
 		public void ArrayUtilNullException()
 		{
-			((int[]) null).CopyExceptElementAt(1);
+			Assert.That(() => ((int[])null).CopyExceptElementAt(1), Throws.InstanceOf<ArgumentNullException>());
 		}
 
-		[Test, ExpectedException(typeof (InvalidOperationException))]
+		[Test]
 		public void ArrayUtilOnEmptyArray()
 		{
-			(new int[] {}).CopyExceptElementAt(1);
+			Assert.That(() => new int[0].CopyExceptElementAt(1), Throws.InstanceOf<InvalidOperationException>());
 		}
 
-		[Test, ExpectedException(typeof (IndexOutOfRangeException))]
+		[Test]
 		public void ArrayUtilWithNegativeArgument()
 		{
-			(new[] {0}).CopyExceptElementAt(-1);
+			Assert.That(() => new[] { 0 }.CopyExceptElementAt(-1), Throws.InstanceOf<IndexOutOfRangeException>());
 		}
 	}
 }
