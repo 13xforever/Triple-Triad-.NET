@@ -131,21 +131,15 @@
     <Compile Include="BoardWindow.xaml.cs">
       <DependentUpon>BoardWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Solver\CardInfo.cs" />
-    <Compile Include="Solver\Enums.cs" />
-    <Compile Include="Solver\FieldCell.cs" />
-    <Compile Include="Solver\GameAnalyzer.cs" />
-    <Compile Include="Solver\PlayCard.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Solver\PlayField.cs" />
-    <Compile Include="Solver\PlayHand.cs" />
-    <Compile Include="Solver\State.cs" />
-    <Compile Include="Util\ArrayUtil.cs" />
+    <Compile Include="Utils\ArrayEx.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\DataTypes.cs" />
+    <Compile Include="Logic\Rules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -320,6 +314,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Buffers">
+      <Version>4.5.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
