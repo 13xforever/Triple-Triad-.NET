@@ -28,3 +28,8 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .svn/
+.vs/
+*.~*
+*.dcu
+*.dcp
+*.ddp

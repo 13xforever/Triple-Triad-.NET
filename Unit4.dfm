@@ -3,7 +3,7 @@ object fSelectElement: TfSelectElement
   Top = 128
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsToolWindow
-  Caption = #1042#1099#1073#1086#1088' '#1101#1083#1077#1084#1077#1085#1090#1072
+  Caption = 'Element Select'
   ClientHeight = 21
   ClientWidth = 161
   Color = clBtnFace

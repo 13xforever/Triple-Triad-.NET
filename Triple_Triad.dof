@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=D:\Work\Delphi Builds\Triple Triad
+OutputDir=C:\Documents and Settings\13xforever\Рабочий стол\Triple Triad\res
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -105,33 +105,39 @@ HostApplication=
 Launcher=
 UseLauncher=0
 DebugCWD=
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=1
-MinorVer=0
+MinorVer=1
 Release=0
-Build=14
+Build=28
 Debug=0
 PreRelease=0
 Special=0
-Private=1
+Private=0
 DLL=0
-Locale=1049
-CodePage=1251
+Locale=1033
+CodePage=1252
 [Version Info Keys]
-CompanyName=WiLLiESoft
+CompanyName=13xforever
 FileDescription=© 1999 Triple Triad by SquareSoft
-FileVersion=1.0.0.14
-InternalName=Triple_Triad.exe
-LegalCopyright=© 2004-2005 Coded by 13xforever
+FileVersion=1.1.0.28
+InternalName=Triple_Triad_MT.exe
+LegalCopyright=© 2004-2020 Coded by 13xforever
 LegalTrademarks=Powered by Borland Delphi 7
-OriginalFilename=Triple_Triad.exe
+OriginalFilename=Triple_Triad_MT.exe
 ProductName=Final Fantsy VIII
 ProductVersion=1.0.0.0
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlOutputDirectorry]
-Count=1
-Item0=D:\Work\Delphi Builds\Triple Triad
+Count=3
+Item0=C:\Documents and Settings\13xforever\Рабочий стол\Triple Triad\res
+Item1=C:\Documents and Settings\13xforever\Рабочий стол
+Item2=D:\Work\Delphi Builds\Triple Triad

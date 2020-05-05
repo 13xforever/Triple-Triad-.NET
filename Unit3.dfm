@@ -3,7 +3,7 @@ object fSelectCard: TfSelectCard
   Top = 158
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsToolWindow
-  Caption = #1042#1099#1073#1086#1088' '#1082#1072#1088#1090#1099
+  Caption = 'Card Select'
   ClientHeight = 73
   ClientWidth = 137
   Color = clBtnFace

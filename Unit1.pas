@@ -7,32 +7,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Menus;
+  Dialogs, StdCtrls, ExtCtrls, Menus, Unit6;
 
 const
   clOpponent = $00CAA6F0;
   clPlayer = clSkyBlue;
-
-type
-  TCardInfo = record
-    ID: string[14];
-    Used, Our: Boolean;
-    Bonus: Shortint;
-    Left, Up, Right, Down, Element: string[1];
-  end;
-  TCellInfo = record
-    Element: string[1];
-    CardID: string[2];
-    Card: TCardInfo;
-  end;
-  TGameInfo = record
-    Cells_Used: byte;
-    Field_Cell: array [0..4, 0..4] of TCellInfo;
-  end;
-  TStat = array [0..3] of LongWord; //(id, Loses, Draws, Wins)
-  TScore = array [False..True] of byte;
-  THandStat = array [1..5] of TStat;
-  THandInfo = array [1..5] of TCardInfo;
 
 type
   TfMain = class(TForm)
@@ -174,10 +153,10 @@ type
 
 var
   fMain: TfMain;
-  CurHandStat: THandStat;
-  CurGameStat: TGameInfo;
   ProposeStr, MoveToID, MoveToCardID: String;
   Thinking: Boolean;
+  CurHandStat: THandStat;
+  CurGameStat: TGameInfo;
 
 implementation
 
@@ -187,9 +166,9 @@ uses INIFiles, ShellAPI, Unit2, Unit3, Unit4, Unit5;
 
 const
   ToElement: array [0..8] of string[1] = ('', 'F', 'I', 'T', 'W', 'w', 'E', 'P', 'H');
-  CellToWord: array [1..3, 1..3] of string = (('левый нижний угол', 'левую клетку', 'левый верхний угол'),
-                                              ('нижнюю клетку', 'центральную клетку', 'верхнюю клетку'),
-                                              ('правый нижний угол', 'правую клетку', 'правый верхний угол'));
+  CellToWord: array [1..3, 1..3] of string = (('lower left corner', 'left middle cell', 'upper left corner'),
+                                              ('bottom middle cell', 'center cell', 'top middle cell'),
+                                              ('lower right corner', 'middle right cell', 'upper right corner'));
 
 var
   OpponentHand, PlayerHand: THandInfo;
@@ -1040,6 +1019,7 @@ var
   local_stat: TStat;
   i, j, k: byte;
   f: boolean;
+  threads: array [1..5] of TMyThread;
 begin
   f := false;
   for i := 1 to 5 do
@@ -1064,7 +1044,15 @@ begin
   ProposeStr := '';
   MoveToID := '';
   MoveToCardID := '';
-  FindMove(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0);
+  for i := 1 to 5 do
+    begin
+      threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
+    end;
+  for i := 1 to 5 do
+    begin
+      threads[i].WaitFor;
+      //threads[i].Free;
+    end;
 
   for k := 1 to 5 do
     if not PlayerHand[k].Used then
@@ -1081,7 +1069,7 @@ begin
   Thinking := False;
   MoveToID := IntToStr(local_stat[0] div 10) + IntToStr(local_stat[0] mod 10);
   MoveToCardID := PlayerHand[k].ID;
-  ProposeStr := MoveToCardID + ' в ' + CellToWord[local_stat[0] div 10, local_stat[0] mod 10];
+  ProposeStr := MoveToCardID + ' into the ' + CellToWord[local_stat[0] div 10, local_stat[0] mod 10];
 //  MessageBox(Handle, pChar('Рекомендуется ходить ' + ProposeStr), 'Рекомендуемый ход', MB_OK + MB_ICONINFORMATION);
 
   gCardBox1.Enabled := True;

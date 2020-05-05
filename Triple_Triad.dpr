@@ -6,7 +6,8 @@ uses
   Unit2 in 'Unit2.pas' {fCardEditor},
   Unit3 in 'Unit3.pas' {fSelectCard},
   Unit4 in 'Unit4.pas' {fSelectElement},
-  Unit5 in 'Unit5.pas' {fStat};
+  Unit5 in 'Unit5.pas' {fStat},
+  Unit6 in 'Unit6.pas';
 
 {$R *.res}
 

@@ -56,7 +56,7 @@ object fMain: TfMain
     Width = 121
     Height = 617
     Anchors = [akLeft, akTop, akBottom]
-    Caption = #1055#1088#1086#1090#1080#1074#1085#1080#1082
+    Caption = 'Opponent'
     DockSite = True
     TabOrder = 6
     object gCard1: TGroupBox
@@ -614,7 +614,7 @@ object fMain: TfMain
     Width = 121
     Height = 617
     Anchors = [akTop, akRight, akBottom]
-    Caption = #1048#1075#1088#1086#1082
+    Caption = 'Player'
     DockSite = True
     TabOrder = 7
     object gCard10: TGroupBox
@@ -1173,7 +1173,7 @@ object fMain: TfMain
     Top = 8
     Width = 401
     Height = 433
-    Caption = #1055#1086#1083#1077
+    Caption = 'Play Field'
     TabOrder = 8
     object Field13: TGroupBox
       Tag = 13
@@ -1478,7 +1478,7 @@ object fMain: TfMain
     Top = 448
     Width = 193
     Height = 129
-    Caption = #1055#1088#1072#1074#1080#1083#1072
+    Caption = 'Rules'
     TabOrder = 3
     object cElemental: TCheckBox
       Left = 8
@@ -1519,7 +1519,7 @@ object fMain: TfMain
       Top = 24
       Width = 65
       Height = 89
-      Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1082#1072#1088#1090#1091
+      Caption = 'Add New Card'
       TabOrder = 4
       WordWrap = True
       OnClick = bCardEditorClick
@@ -1530,7 +1530,7 @@ object fMain: TfMain
     Top = 584
     Width = 145
     Height = 41
-    Caption = '<-- '#1061#1086#1076#1080#1090#1100' (AI)'
+    Caption = '<-- Make a move (AI)'
     TabOrder = 2
     OnClick = bMove1Click
   end
@@ -1539,7 +1539,7 @@ object fMain: TfMain
     Top = 584
     Width = 145
     Height = 41
-    Caption = #1055#1088#1077#1076#1083#1086#1078#1080#1090#1100' '#1093#1086#1076' -->'
+    Caption = 'Find optimal move -->'
     TabOrder = 1
     OnClick = bMove2Click
   end
@@ -1548,7 +1548,7 @@ object fMain: TfMain
     Top = 512
     Width = 201
     Height = 65
-    Caption = #1053#1086#1074#1072#1103' '#1080#1075#1088#1072
+    Caption = 'New Game'
     TabOrder = 0
     OnClick = FormCreate
   end
@@ -1557,7 +1557,7 @@ object fMain: TfMain
     Top = 456
     Width = 97
     Height = 25
-    Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+    Caption = 'Statistics'
     TabOrder = 4
     OnClick = bStatisticsClick
   end
@@ -1566,7 +1566,7 @@ object fMain: TfMain
     Top = 456
     Width = 97
     Height = 25
-    Caption = #1055#1088#1072#1074#1080#1083#1072
+    Caption = 'Manual'
     TabOrder = 5
     OnClick = bShowRulesClick
   end
@@ -1575,7 +1575,7 @@ object fMain: TfMain
     Top = 488
     Width = 201
     Height = 17
-    Caption = #1040#1074#1090#1086#1075#1077#1085#1077#1088#1072#1094#1080#1103' '#1087#1086#1083#1103' '#1080' '#1082#1072#1088#1090
+    Caption = 'Random Game'
     TabOrder = 9
   end
 end

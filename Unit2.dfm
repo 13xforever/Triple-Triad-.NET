@@ -2,7 +2,7 @@ object fCardEditor: TfCardEditor
   Left = 254
   Top = 157
   BorderStyle = bsToolWindow
-  Caption = #1056#1077#1076#1072#1082#1090#1086#1088' '#1082#1072#1088#1090
+  Caption = 'Card Editor'
   ClientHeight = 89
   ClientWidth = 249
   Color = clBtnFace
@@ -30,7 +30,7 @@ object fCardEditor: TfCardEditor
     Top = 8
     Width = 65
     Height = 73
-    Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+    Caption = 'Reload'
     TabOrder = 6
     OnClick = bAddCardClick
   end

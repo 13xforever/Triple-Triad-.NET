@@ -3,7 +3,7 @@ object fStat: TfStat
   Top = 123
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsToolWindow
-  Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+  Caption = 'Statistics'
   ClientHeight = 433
   ClientWidth = 281
   Color = clBtnFace
@@ -226,7 +226,7 @@ object fStat: TfStat
     Height = 17
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = #8470
+    Caption = '#'
   end
   object Label22: TLabel
     Left = 64
@@ -236,7 +236,7 @@ object fStat: TfStat
     Alignment = taRightJustify
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = #1055#1086#1088#1072#1078#1077#1085#1080#1081
+    Caption = 'Defeats'
   end
   object Label23: TLabel
     Left = 136
@@ -246,7 +246,7 @@ object fStat: TfStat
     Alignment = taRightJustify
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = #1053#1080#1095#1100#1080#1093
+    Caption = 'Draws'
   end
   object Label24: TLabel
     Left = 208
@@ -256,7 +256,7 @@ object fStat: TfStat
     Alignment = taRightJustify
     Anchors = [akLeft, akBottom]
     AutoSize = False
-    Caption = #1055#1086#1073#1077#1076
+    Caption = 'Wins'
   end
   object Bevel1: TBevel
     Left = 8
@@ -614,7 +614,7 @@ object fStat: TfStat
     Top = 8
     Width = 265
     Height = 17
-    Caption = #1054#1073#1085#1086#1074#1083#1103#1090#1100' '#1087#1086#1083#1103
+    Caption = 'Refresh cells'
     Checked = True
     State = cbChecked
     TabOrder = 9
