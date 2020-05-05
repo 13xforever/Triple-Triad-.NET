@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Buffers;
+using System.Globalization;
+using System.Linq;
 
 namespace TripleTriad.Logic
 {
@@ -18,12 +20,67 @@ namespace TripleTriad.Logic
 
 	public class Card
 	{
-		public byte Id;
-		public byte Up;
-		public byte Right;
-		public byte Down;
-		public byte Left;
-		public Element Element;
+		private Card(byte id, byte up, byte right, byte down, byte left, Element element, string name)
+		{
+			Id = id;
+			Up = up;
+			Right = right;
+			Down = down;
+			Left = left;
+			Element = element;
+			Name = name;
+		}
+
+		public readonly byte Id;
+		public readonly byte Up;
+		public readonly byte Right;
+		public readonly byte Down;
+		public readonly byte Left;
+		public readonly Element Element;
+		public readonly string Name;
+
+		public static Card Parse(byte id, string description)
+		{
+			var parts = description.Split(splitter, 2);
+			var up = byte.Parse(parts[0].Substring(0, 1), NumberStyles.HexNumber);
+			var right = byte.Parse(parts[0].Substring(1, 1), NumberStyles.HexNumber);
+			var down = byte.Parse(parts[0].Substring(2, 1), NumberStyles.HexNumber);
+			var left = byte.Parse(parts[0].Substring(3, 1), NumberStyles.HexNumber);
+			Element e;
+			switch (parts[0].Substring(4))
+			{
+				case "🔥":
+					e = Element.Fire;
+					break;
+				case "❄":
+					e = Element.Ice;
+					break;
+				case "⚡":
+					e = Element.Thunder;
+					break;
+				case "💧":
+					e = Element.Water;
+					break;
+				case "🌪":
+					e = Element.Wind;
+					break;
+				case "⛰":
+					e = Element.Earth;
+					break;
+				case "🟣":
+					e = Element.Poison;
+					break;
+				case "✨":
+					e = Element.Holy;
+					break;
+				default:
+					e = Element.None;
+					break;
+			}
+			return new Card(id, up, right, down, left, e, parts[1]);
+		}
+
+		private static readonly char[] splitter = { '\t' };
 	}
 
 	public enum Color : byte
@@ -42,6 +99,8 @@ namespace TripleTriad.Logic
 
 		public readonly Card Value;
 		public Color Color;
+
+		public PlayCard Duplicate() => new PlayCard(Value, Color);
 
 		public override bool Equals(object obj) {
 			if (ReferenceEquals(null, obj)) return false;
@@ -74,7 +133,20 @@ namespace TripleTriad.Logic
 		public readonly Element Element;
 		public readonly PlayCard Card;
 
-		public Cell Duplicate(PlayCard newCard) => new Cell(Id, Element, newCard);
+		public Cell With(PlayCard newCard) => new Cell(Id, Element, newCard);
+		public Cell With(Element newElement) => new Cell(Id, newElement, Card);
+	}
+
+	public static class Field
+	{
+		static Field()
+		{
+			Default = new Cell[9];
+			for (byte i = 0; i < 9; i++)
+				Default[i] = new Cell(i, Element.None, null);
+		}
+
+		public static readonly Cell[] Default;
 	}
 
 	public struct State
@@ -84,6 +156,8 @@ namespace TripleTriad.Logic
 		public Cell[] Field;
 
 		public bool IsFinished => BlueHand.Length + PinkHand.Length == 1;
+		public int PinkScore => Field.Count(c => c.Card?.Color == Color.Pink) + PinkHand.Length;
+		public void SetElement(byte idx, Element e) => Field[idx] = Field[idx].With(e);
 	}
 
 	public struct Stats

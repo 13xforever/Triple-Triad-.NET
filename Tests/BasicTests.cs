@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using TripleTriad.Solver;
+using TripleTriad.Logic;
 
 namespace Tests
 {
@@ -10,9 +10,9 @@ namespace Tests
 		[Test]
 		public void CardInfoLoad()
 		{
-			Assert.That(CardInfo.CardPool.Count, Is.EqualTo(110));
-			Assert.That(CardInfo.CardPool.ContainsKey("Squall"));
-			Assert.That(CardInfo.CardPool["Squall"].Up, Is.EqualTo(10));
+			Assert.That(CardPool.Count, Is.EqualTo(110));
+			Assert.That(CardPool.Find("Squall"), Is.Not.Null);
+			Assert.That(CardPool.Find("Squall").Up, Is.EqualTo(10));
 		}
 
 		[Test]
@@ -25,15 +25,6 @@ namespace Tests
 			Assert.That(e, Is.EqualTo(Element.Thunder));
 			Enum.TryParse("Poison", out e);
 			Assert.That(e, Is.Not.EqualTo(Element.Holy));
-		}
-
-		[Test]
-		public void PlayCard()
-		{
-			var playCard = new PlayCard(CardInfo.CardPool["Squall"], true);
-			Assert.That(playCard.isBlue);
-			playCard.Flip();
-			Assert.That(playCard.isBlue, Is.False);
 		}
 	}
 }

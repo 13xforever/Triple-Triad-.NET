@@ -4,7 +4,7 @@
 1647⚡	Blitz
 1848	Oilboyle
 1877	Catoblepas
-1883☣	Gerogero
+1883🟣	Gerogero
 2126⚡	Cockatrice
 2144⚡	Gayla
 2161	Blood Soul
@@ -14,11 +14,11 @@
 2763🔥	Bomb
 2884	Fujin & Raijin
 2994⚡	Quezacotl
-31AA☣	Doomtrain
+31AA🟣	Doomtrain
 3217	Jelleye
 3453	Belhelmel
 3521⛰	Fastitocalon-F
-3555☣	Tri-Face
+3555🟣	Tri-Face
 3644	Tonberry
 3657	Behemoth
 3736	Imp
@@ -36,7 +36,7 @@
 4873	X-ATM092
 4A2A	Rinoa
 5113	Fungaur
-5135☣	Anacondaur
+5135🟣	Anacondaur
 5199⛰	Sacred
 5252⚡	Creeps
 5253	Grand Mantis
@@ -55,7 +55,7 @@
 6223	Buel
 6263	Cactuar
 6267	Elastoid
-6273☣	Blue Dragon
+6273🟣	Blue Dragon
 6316⛰	Armadodo
 6545	Vysage
 6565	Iron Giant
@@ -81,7 +81,7 @@
 7581	Krysta
 7653💧	Chimera
 7728	Ultima Weapon
-7742☣	Malboro
+7742🟣	Malboro
 7834🌪	Elvoret
 7A17💧	Leviathan
 8282	Iguion

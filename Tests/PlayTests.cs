@@ -1,70 +1,91 @@
 using NUnit.Framework;
-using TripleTriad.Solver;
+using TripleTriad.Logic;
 
 namespace Tests
 {
 	[TestFixture]
 	public class PlayTests
 	{
+		private readonly PlayCard[] pinkHand =
+		{
+			new PlayCard(CardPool.Find("Shumi Tribe"), Color.Pink),
+			new PlayCard(CardPool.Find("BGH251F2"), Color.Pink),
+			new PlayCard(CardPool.Find("Squall"), Color.Pink),
+			new PlayCard(CardPool.Find("Fastitocalon"), Color.Pink),
+			new PlayCard(CardPool.Find("Pandemona"), Color.Pink),
+		};
+
+		private readonly PlayCard[] blueHand =
+		{
+			new PlayCard(CardPool.Find("Quistis"), Color.Blue),
+			new PlayCard(CardPool.Find("Granaldo"), Color.Blue),
+			new PlayCard(CardPool.Find("Blue Dragon"), Color.Blue),
+			new PlayCard(CardPool.Find("Oilboyle"), Color.Blue),
+			new PlayCard(CardPool.Find("Tiamat"), Color.Blue),
+		};
+
 		[Test]
 		public void SimpleGame()
 		{
-			var redHand = new PlayHand(new[]
-			                           	{
-			                           		new PlayCard(CardInfo.CardPool["Shumi Tribe"]),
-			                           		new PlayCard(CardInfo.CardPool["BGH251F2"]),
-			                           		new PlayCard(CardInfo.CardPool["Squall"]),
-			                           		new PlayCard(CardInfo.CardPool["Fastitocalon"]),
-			                           		new PlayCard(CardInfo.CardPool["Pandemona"]),
-			                           	}, false);
-			var blueHand = new PlayHand(new[]
-			                            	{
-			                            		new PlayCard(CardInfo.CardPool["Quistis"]),
-			                            		new PlayCard(CardInfo.CardPool["Granaldo"]),
-			                            		new PlayCard(CardInfo.CardPool["Blue Dragon"]),
-			                            		new PlayCard(CardInfo.CardPool["Oilboyle"]),
-			                            		new PlayCard(CardInfo.CardPool["Tiamat"]),
-			                            	}, true);
-			var state = new State(new PlayField(), RuleModifier.None, blueHand, redHand, true);
-
+			var state = new State{Field = Field.Default, BlueHand = blueHand, PinkHand = pinkHand};
+			var rules = new Rules();
+			/*
+			 * 0 1 2
+			 * 3 4 5
+			 * 6 7 8
+			 */
 			//Turn 1
-			var playCard = blueHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 0, 0);
+			state = rules.Play(state, state.BlueHand[0], 0);
+			Assert.That(state.BlueHand.Length, Is.EqualTo(4));
 
 			//Turn 2
-			playCard = redHand.hand[0].cardInfo;
-			state = state.PlayCard(playCard, 1, 0);
+			state = rules.Play(state, state.PinkHand[0], 1);
+			Assert.That(state.PinkHand.Length, Is.EqualTo(4));
 
 			//Turn 3
-			playCard = blueHand.hand[1].cardInfo;
-			state = state.PlayCard(playCard, 2, 0);
+			state = rules.Play(state, state.BlueHand[0], 2);
+			Assert.That(state.BlueHand.Length, Is.EqualTo(3));
 
 			//Turn 4
-			playCard = redHand.hand[1].cardInfo;
-			state = state.PlayCard(playCard, 0, 1);
+			state = rules.Play(state, state.PinkHand[0], 3);
+			Assert.That(state.PinkHand.Length, Is.EqualTo(3));
 
 			//Turn 5
-			playCard = blueHand.hand[2].cardInfo;
-			state = state.PlayCard(playCard, 1, 1);
+			state = rules.Play(state, state.BlueHand[0], 4);
+			Assert.That(state.BlueHand.Length, Is.EqualTo(2));
 
 			//Turn 6
-			playCard = redHand.hand[2].cardInfo;
-			state = state.PlayCard(playCard, 2, 1);
+			state = rules.Play(state, state.PinkHand[0], 5);
+			Assert.That(state.PinkHand.Length, Is.EqualTo(2));
 
 			//Turn 7
-			playCard = blueHand.hand[3].cardInfo;
-			state = state.PlayCard(playCard, 0, 2);
+			state = rules.Play(state, state.BlueHand[0], 6);
+			Assert.That(state.BlueHand.Length, Is.EqualTo(1));
 
 			//Turn 8
-			playCard = redHand.hand[3].cardInfo;
-			state = state.PlayCard(playCard, 1, 2);
+			state = rules.Play(state, state.PinkHand[0], 7);
+			Assert.That(state.PinkHand.Length, Is.EqualTo(1));
 
 			//Turn 9
-			playCard = blueHand.hand[4].cardInfo;
-			state = state.PlayCard(playCard, 2, 2);
+			state = rules.Play(state, state.BlueHand[0], 8);
+			Assert.That(state.BlueHand.Length, Is.EqualTo(0));
 
-			Assert.That(state.GameIsOver);
-			Assert.That(state.Balance, Is.EqualTo(2));
+			Assert.That(state.IsFinished);
+			Assert.That(state.PinkScore, Is.EqualTo(6));
+		}
+
+		[Test]
+		public void FindMoveTest()
+		{
+			var state = new State { Field = Field.Default, BlueHand = blueHand, PinkHand = pinkHand };
+			var rules = new Rules();
+
+			var (card, position, stats) = rules.FindBestMove(state, Color.Pink);
+			Assert.That(card.Name, Is.EqualTo("BGH251F2"));
+			Assert.That(position, Is.EqualTo(8));
+			Assert.That(stats.Wins, Is.EqualTo(0));
+			Assert.That(stats.Draws, Is.EqualTo(0));
+			Assert.That(stats.Defeats, Is.EqualTo(0));
 		}
 	}
 }

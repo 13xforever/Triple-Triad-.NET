@@ -135,6 +135,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Logic\CardPool.cs" />
     <Compile Include="Utils\ArrayEx.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +169,7 @@
     <None Include="Resources\Convert-IniToXml.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Cards.xml" />
+    <None Include="Resources\Cards.xml" />
     <Resource Include="Resources\Cards\01-01.png" />
     <Resource Include="Resources\Cards\01-02.png" />
     <Resource Include="Resources\Cards\01-03.png" />
@@ -305,7 +306,7 @@
     <Resource Include="Resources\gfx\rule_08.png" />
     <Resource Include="Resources\gfx\rule_09.png" />
     <Resource Include="Resources\gfx\rule_10.png" />
-    <Resource Include="Resources\Cards.txt" />
+    <EmbeddedResource Include="Resources\Cards.txt" />
     <Content Include="Resources\Rules.htm" />
   </ItemGroup>
   <ItemGroup>

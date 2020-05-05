@@ -15,7 +15,7 @@ namespace TripleTriad.Logic
 		private readonly bool sameWall;
 		private readonly bool combo;
 
-		public Rules(bool elemental, bool plus, bool same, bool sameWall)
+		public Rules(bool elemental = false, bool plus = false, bool same = false, bool sameWall = false)
 		{
 			if (sameWall && !same)
 				throw new ArgumentException("Same Wall rule was enabled, but not the Same rule");
@@ -27,7 +27,7 @@ namespace TripleTriad.Logic
 			combo = plus || same || sameWall;
 		}
 
-		public (PlayCard card, byte position) FindBestMove(State state, Color startHand)
+		public (Card card, byte position, Stats stats) FindBestMove(State state, Color startHand)
 		{
 			var hand = startHand == Color.Blue ? state.BlueHand : state.PinkHand;
 			var cardsToPlay = hand.OrderBy(c => c.Value.Id).Distinct().ToArray();
@@ -38,7 +38,12 @@ namespace TripleTriad.Logic
 				states[x].c = cardsToPlay[x];
 				states[x].t = Task.Run(() =>
 				{
-					var bestResult = new Stats();
+					var bestResult = new Stats
+					{
+						Defeats = int.MaxValue,
+						Draws = int.MaxValue,
+						Wins = 0,
+					};
 					var latestResult = new Stats();
 					byte bestIdx = 0;
 					for (byte idx = 0; idx < 9; idx++)
@@ -47,8 +52,7 @@ namespace TripleTriad.Logic
 							continue;
 
 						SearchInDepth(state, states[x].c, idx, ref latestResult);
-						if (bestResult.Draws + bestResult.Defeats + bestResult.Wins == 0
-							|| bestResult.Defeats > latestResult.Defeats
+						if (bestResult.Defeats > latestResult.Defeats
 							|| bestResult.Defeats == latestResult.Defeats && bestResult.Draws > latestResult.Draws)
 						{
 							bestResult = latestResult;
@@ -58,16 +62,16 @@ namespace TripleTriad.Logic
 					states[x].s = bestResult;
 					states[x].i = bestIdx;
 				});
+				states[x].t.GetAwaiter().GetResult();
 			}
 			foreach (var (_, t, _,  _) in states)
 				t.ConfigureAwait(false).GetAwaiter().GetResult();
 			var bestMove = states.OrderBy(s => s.s.Defeats).ThenBy(s => s.s.Draws).First();
-			return (bestMove.c, bestMove.i);
+			return (bestMove.c.Value, bestMove.i, bestMove.s);
 		}
 
 		private void SearchInDepth(State state, PlayCard card, byte idx, ref Stats stats)
 		{
-
 			var newState = new State();
 			if (card.Color == Color.Blue)
 			{
@@ -80,15 +84,17 @@ namespace TripleTriad.Logic
 				newState.PinkHand = state.PinkHand;
 			}
 			var newField = ArrayPool<Cell>.Shared.Rent(9);
+			newState.Field = newField;
 			Array.Copy(state.Field, newField, 9);
-			newField[idx] = state.Field[idx].Duplicate(card);
+			newField[idx] = state.Field[idx].With(card);
 			Play(newField, idx);
 			if (newState.IsFinished)
 			{
 				byte pinkCount = 0;
-				foreach (var cell in newState.Field)
+				for (var i = 0; i < 9; i++)
 				{
-					if (cell.Card.Color == Color.Pink)
+					var cell = newState.Field[i];
+					if (cell.Card?.Color == Color.Pink)
 						pinkCount++;
 					if (newState.PinkHand.Length == 1)
 						pinkCount++;
@@ -109,6 +115,24 @@ namespace TripleTriad.Logic
 							SearchInDepth(newState, pc, nIdx, ref stats);
 			}
 			ArrayPool<Cell>.Shared.Return(newField);
+		}
+
+		public State Play(State state, PlayCard card, byte idx)
+		{
+			var newState = new State
+			{
+				Field = new Cell[9],
+				BlueHand = state.BlueHand,
+				PinkHand = state.PinkHand,
+			};
+			Array.Copy(state.Field, newState.Field, 9);
+			newState.Field[idx] = state.Field[idx].With(card);
+			if (card.Color == Color.Pink)
+				newState.PinkHand = state.PinkHand.Exclude(card);
+			else
+				newState.BlueHand = state.BlueHand.Exclude(card);
+			Play(newState.Field, idx);
+			return newState;
 		}
 
 		private void Play(Cell[] field, byte idx)
