@@ -128,6 +128,16 @@ type
     bStatistics: TButton;
     cRandomize: TCheckBox;
     bCardEditor: TButton;
+    cMT: TCheckBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     procedure FormDockDrop(Sender: TObject; Source: TDragDockObject; X, Y: Integer);
     procedure SelectCard(Sender: TObject);
     procedure bCardEditorClick(Sender: TObject);
@@ -357,7 +367,7 @@ begin
   tmp := fSelectCard.pCardName.Text;
   with (FindComponent('gCard' + id) as TGroupBox) do
     begin
-      Caption := tmp;
+      Caption := StringReplace(tmp, '&', '&&', []);
       DragMode := dmAutomatic
     end;
   (FindComponent('lLeft' + id) as TLabel).Caption := myini.ReadString(tmp, 'Left', '');
@@ -475,11 +485,11 @@ begin
       RefreshField;
       if CurrentGame.Cells_Used = 9 then
         if Score[True] < Score[False] then
-          MessageBox(Handle, 'Это полный провал...', 'Конец игры', MB_OK + MB_ICONINFORMATION)
+          MessageBox(Handle, 'You''ve been defeated', 'Game Over', MB_OK + MB_ICONINFORMATION)
         else if Score[True] = Score[False] then
-          MessageBox(Handle, 'И все же ничья', 'Конец игры', MB_OK + MB_ICONINFORMATION)
+          MessageBox(Handle, 'It''s a draw', 'Game Over', MB_OK + MB_ICONINFORMATION)
         else
-          MessageBox(Handle, 'Победа - это здорово!', 'Конец игры', MB_OK + MB_ICONINFORMATION)
+          MessageBox(Handle, 'You won', 'Game Over', MB_OK + MB_ICONINFORMATION)
     end
 end;
 
@@ -1053,22 +1063,27 @@ begin
   ProposeStr := '';
   MoveToID := '';
   MoveToCardID := '';
-  for i := 1 to 5 do
+  if cMT.Checked then
     begin
-      threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
-      threads[i].WaitFor;
-    end;
-  for i := 1 to 5 do
-    begin
-      while not threads[i].Completed do
+      for i := 1 to 5 do
         begin
-          Application.ProcessMessages;
-          SysUtils.Sleep(10);
+          threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
+          threads[i].WaitFor;
         end;
-      threads[i].WaitFor;
-      //local_stat := threads[i].LocalStat;
-      //threads[i].Free;
-    end;
+      for i := 1 to 5 do
+        begin
+          while not threads[i].Completed do
+            begin
+              Application.ProcessMessages;
+              SysUtils.Sleep(10);
+            end;
+          threads[i].WaitFor;
+          //local_stat := threads[i].LocalStat;
+          //threads[i].Free;
+        end
+    end
+  else
+    FindMove(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0);
 
   for k := 1 to 5 do
     if not PlayerHand[k].Used then

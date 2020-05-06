@@ -1195,6 +1195,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 0
       OnDockDrop = FormDockDrop
+      object Label7: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '31'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement13: TLabel
         Tag = 13
         Left = 112
@@ -1249,6 +1264,21 @@ object fMain: TfMain
         AutoSize = False
         Transparent = True
       end
+      object Label8: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '32'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
     end
     object Field33: TGroupBox
       Tag = 33
@@ -1261,6 +1291,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 2
       OnDockDrop = FormDockDrop
+      object Label9: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '33'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement33: TLabel
         Tag = 33
         Left = 112
@@ -1294,6 +1339,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 3
       OnDockDrop = FormDockDrop
+      object Label4: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '21'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement12: TLabel
         Tag = 12
         Left = 112
@@ -1327,6 +1387,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 4
       OnDockDrop = FormDockDrop
+      object Label5: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '22'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement22: TLabel
         Tag = 22
         Left = 112
@@ -1360,6 +1435,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 5
       OnDockDrop = FormDockDrop
+      object Label6: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '23'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement32: TLabel
         Tag = 32
         Left = 112
@@ -1393,6 +1483,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 6
       OnDockDrop = FormDockDrop
+      object Label1: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '11'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement11: TLabel
         Tag = 11
         Left = 112
@@ -1426,6 +1531,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 7
       OnDockDrop = FormDockDrop
+      object Label2: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '12'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement21: TLabel
         Tag = 21
         Left = 112
@@ -1459,6 +1579,21 @@ object fMain: TfMain
       ParentColor = False
       TabOrder = 8
       OnDockDrop = FormDockDrop
+      object Label3: TLabel
+        Left = 16
+        Top = 24
+        Width = 97
+        Height = 97
+        Alignment = taCenter
+        AutoSize = False
+        Caption = '13'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnHighlight
+        Font.Height = -85
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+      end
       object lElement31: TLabel
         Tag = 31
         Left = 112
@@ -1569,5 +1704,13 @@ object fMain: TfMain
     TabOrder = 9
     WordWrap = True
     OnClick = bCardEditorClick
+  end
+  object cMT: TCheckBox
+    Left = 344
+    Top = 504
+    Width = 185
+    Height = 17
+    Caption = 'Multi-Threading (Broken)'
+    TabOrder = 10
   end
 end
