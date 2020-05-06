@@ -93,14 +93,26 @@ uses MainForm;
 procedure TfStat.Timer1Timer(Sender: TObject);
 var
   i, j: byte;
-  id: string;
+  t: Int64;
+  id, tmp: string;
 begin
   for i := 1 to 5 do
-    for j := 0 to 4 do
-      begin
-        id := IntToStr(i * 10 + j);
-        (FindComponent('lStat' + id) as TLabel).Caption := IntToStr(CurHandStat[i][j])
-      end;
+    begin
+      t := 0;
+      for j := 1 to 3 do
+        t := t + CurHandStat[i][j];
+      for j := 0 to 3 do
+        begin
+          id := IntToStr(i * 10 + j);
+          if (j > 0) and (t > 0) and (CurHandStat[i][j] > 0) then
+            tmp := FloatToStrF(CurHandStat[i][j] * 100.0 / t, ffGeneral, 3, 1) + '%'
+          else if (CurHandStat[i][j] > 0) then
+            tmp := IntToStr(CurHandStat[i][j])
+          else
+            tmp := '-';
+          (FindComponent('lStat' + id) as TLabel).Caption := tmp
+        end
+    end;
   if cbRefresh.Checked then
     if Thinking then
       for i := 1 to 3 do
@@ -113,7 +125,7 @@ begin
                   (FindComponent('color' + id) as TShape).Brush.Color := clPlayer
                 else
                   (FindComponent('color' + id) as TShape).Brush.Color := clOpponent;
-                (FindComponent('l' + id) as TLabel).Caption := CurGameStat.Field_Cell[i, j].Card.ID
+                (FindComponent('l' + id) as TLabel).Caption := StringReplace(CurGameStat.Field_Cell[i, j].Card.ID, '&', '&&', [])
               end
             else
               begin
@@ -129,7 +141,7 @@ begin
             if id = MoveToID then
               begin
                 (FindComponent('color' + id) as TShape).Brush.Color := clPlayer;
-                (FindComponent('l' + id) as TLabel).Caption := MoveToCardID
+                (FindComponent('l' + id) as TLabel).Caption := StringReplace(MoveToCardID, '&', '&&', [])
               end
             else
               begin

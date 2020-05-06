@@ -52,8 +52,6 @@ implementation
 uses MainForm;
 
 constructor TMyThread.Create(const game: TGameInfo; const score: TScore; plh, oph: THandInfo; const plmove: boolean; var stat: TStat; const lvl, tid: byte; const rpl, rs, rsw, re: boolean);
-var
-  i: byte;
 begin
   inherited Create(false);
   Completed := False;

@@ -329,6 +329,9 @@ begin
           (FindComponent('lRight' + id) as TLabel).Caption := FromInt[LastHand[i].Right];
           (FindComponent('lDown' + id) as TLabel).Caption := FromInt[LastHand[i].Down];
           (FindComponent('lElement' + id) as TLabel).Caption := LastHand[i].Element;
+          PlayerHand[i] := LastHand[i];
+          PlayerHand[i].Used := false;
+          PlayerHand[i].Our := true;
         end;
   if FirstPass then
     begin
@@ -459,11 +462,11 @@ begin
     Left := (Screen.Width - Width) div 2
 end;
 
-procedure TfMain.FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
-  Y: Integer);
+procedure TfMain.FormDockDrop(Sender: TObject; Source: TDragDockObject; X, Y: Integer);
 var
   i: byte;
   _x, _y: byte;
+  _cap: string;
 begin
   Inc(CurrentGame.Cells_Used);
   _x := (Sender as TGroupBox).Tag div 10;
@@ -473,10 +476,11 @@ begin
       Top := ((Sender as TGroupBox).ClientHeight - Height) div 2;
       Left := ((Sender as TGroupBox).ClientWidth - Width) div 2;
       (Sender as TGroupBox).Enabled := False;
+      _cap := StringReplace(Caption, '&&', '&', []);
 
       if Tag > 5 then
         for i := 1 to 5 do
-          if (PlayerHand[i].ID = Caption) and not(PlayerHand[i].Used) then
+          if (PlayerHand[i].ID = _cap) and not(PlayerHand[i].Used) then
             begin
               PlayerHand[i].Used := True;
               CurrentGame.Field_Cell[_x, _y].CardID := IntToStr(Tag);
@@ -486,7 +490,7 @@ begin
           else
       else
         for i := 1 to 5 do
-          if (OpponentHand[i].ID = Caption) and not(OpponentHand[i].Used) then
+          if (OpponentHand[i].ID = _cap) and not(OpponentHand[i].Used) then
             begin
               OpponentHand[i].Used := True;
               CurrentGame.Field_Cell[_x, _y].CardID := IntToStr(Tag);
@@ -1127,7 +1131,7 @@ begin
   Thinking := False;
   MoveToID := IntToStr(local_stat[0] div 10) + IntToStr(local_stat[0] mod 10);
   MoveToCardID := PlayerHand[k].ID;
-  ProposeStr := MoveToCardID + ' into the ' + CellToWord[local_stat[0] div 10, local_stat[0] mod 10];
+  ProposeStr := StringReplace(MoveToCardID, '&', '&&', []) + ' into the ' + CellToWord[local_stat[0] div 10, local_stat[0] mod 10];
 
   gCardBox1.Enabled := True;
   gCardBox2.Enabled := True;

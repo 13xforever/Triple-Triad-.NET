@@ -1202,7 +1202,7 @@ object fMain: TfMain
         Height = 97
         Alignment = taCenter
         AutoSize = False
-        Caption = '31'
+        Caption = '13'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
         Font.Height = -85
@@ -1271,7 +1271,7 @@ object fMain: TfMain
         Height = 97
         Alignment = taCenter
         AutoSize = False
-        Caption = '32'
+        Caption = '23'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
         Font.Height = -85
@@ -1346,7 +1346,7 @@ object fMain: TfMain
         Height = 97
         Alignment = taCenter
         AutoSize = False
-        Caption = '21'
+        Caption = '12'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
         Font.Height = -85
@@ -1442,7 +1442,7 @@ object fMain: TfMain
         Height = 97
         Alignment = taCenter
         AutoSize = False
-        Caption = '23'
+        Caption = '32'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
         Font.Height = -85
@@ -1538,7 +1538,7 @@ object fMain: TfMain
         Height = 97
         Alignment = taCenter
         AutoSize = False
-        Caption = '12'
+        Caption = '21'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
         Font.Height = -85
@@ -1586,7 +1586,7 @@ object fMain: TfMain
         Height = 97
         Alignment = taCenter
         AutoSize = False
-        Caption = '13'
+        Caption = '31'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
         Font.Height = -85
