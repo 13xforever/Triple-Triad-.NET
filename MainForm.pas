@@ -184,7 +184,6 @@ var
   CurrentGame: TGameInfo;
   CurrentStat: TStat = (0, 0, 0, 0);
   Score: TScore = (5, 5);
-  ToInt: array ['1'..'A'] of byte;
   FirstPass: Boolean = true;
 
 procedure TfMain.FormCreate(Sender: TObject);
@@ -198,14 +197,18 @@ begin
   WriteLock := TCriticalSection.Create;
   Thinking := false;
   for i := 1 to 9 do
-    ToInt[Chr(Ord('0') + i)] := i;
+    begin
+      ToInt[Chr(Ord('0') + i)] := i;
+      FromInt[i] := Chr(Ord('0') + i);
+    end;
   ToInt['A'] := 10;
+  FromInt[10] := 'A';
   for j := 0 to 4 do
     begin
-      CurrentGame.Field_Cell[j, 0].Card.Up := 'A';
-      CurrentGame.Field_Cell[j, 4].Card.Down := 'A';
-      CurrentGame.Field_Cell[0, j].Card.Right := 'A';
-      CurrentGame.Field_Cell[4, j].Card.Left := 'A'
+      CurrentGame.Field_Cell[j, 0].Card.Up := 10;
+      CurrentGame.Field_Cell[j, 4].Card.Down := 10;
+      CurrentGame.Field_Cell[0, j].Card.Right := 10;
+      CurrentGame.Field_Cell[4, j].Card.Left := 10
     end;
 {$IFDEF NEW}
   gRules.Enabled := True;
@@ -286,10 +289,10 @@ begin
                   Used := False;
                   Our := True;
                   Bonus := 0;
-                  Left := myini.ReadString(tmp, 'Left', '');
-                  Up := myini.ReadString(tmp, 'Up', '');
-                  Right := myini.ReadString(tmp, 'Right', '');
-                  Down := myini.ReadString(tmp, 'Down', '');
+                  Left := ToInt[myini.ReadString(tmp, 'Left', '1')[1]];
+                  Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
+                  Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
+                  Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
                   Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
                 end;
               LastHand[i - 5] := PlayerHand[i - 5];
@@ -301,10 +304,10 @@ begin
                 Used := False;
                 Our := False;
                 Bonus := 0;
-                Left := myini.ReadString(tmp, 'Left', '');
-                Up := myini.ReadString(tmp, 'Up', '');
-                Right := myini.ReadString(tmp, 'Right', '');
-                Down := myini.ReadString(tmp, 'Down', '');
+                Left := ToInt[myini.ReadString(tmp, 'Left', '1')[1]];
+                Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
+                Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
+                Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
                 Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
               end
         end;
@@ -313,19 +316,20 @@ begin
     end
   else if not FirstPass then
     for i := 1 to 5 do
-      begin
+      if LastHand[i].Up > 0 then
+        begin
           id := IntToStr(i + 5);
           with (FindComponent('gCard' + id) as TGroupBox) do
             begin
               Caption := StringReplace(LastHand[i].ID, '&', '&&', []);
               DragMode := dmAutomatic
             end;
-          (FindComponent('lLeft' + id) as TLabel).Caption := LastHand[i].Left;
-          (FindComponent('lUp' + id) as TLabel).Caption := LastHand[i].Up;
-          (FindComponent('lRight' + id) as TLabel).Caption := LastHand[i].Right;
-          (FindComponent('lDown' + id) as TLabel).Caption := LastHand[i].Down;
+          (FindComponent('lLeft' + id) as TLabel).Caption := FromInt[LastHand[i].Left];
+          (FindComponent('lUp' + id) as TLabel).Caption := FromInt[LastHand[i].Up];
+          (FindComponent('lRight' + id) as TLabel).Caption := FromInt[LastHand[i].Right];
+          (FindComponent('lDown' + id) as TLabel).Caption := FromInt[LastHand[i].Down];
           (FindComponent('lElement' + id) as TLabel).Caption := LastHand[i].Element;
-      end;
+        end;
   if FirstPass then
     begin
       cRandomize.Checked := false;
@@ -404,10 +408,10 @@ begin
           Used := False;
           Our := True;
           Bonus := 0;
-          Left := myini.ReadString(tmp, 'Left', '');
-          Up := myini.ReadString(tmp, 'Up', '');
-          Right := myini.ReadString(tmp, 'Right', '');
-          Down := myini.ReadString(tmp, 'Down', '');
+          Left := ToInt[myini.ReadString(tmp, 'Left', '1')[1]];
+          Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
+          Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
+          Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
           Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
         end;
       LastHand[i] := PlayerHand[i]
@@ -419,10 +423,10 @@ begin
         Used := False;
         Our := False;
         Bonus := 0;
-        Left := myini.ReadString(tmp, 'Left', '');
-        Up := myini.ReadString(tmp, 'Up', '');
-        Right := myini.ReadString(tmp, 'Right', '');
-        Down := myini.ReadString(tmp, 'Down', '');
+        Left := ToInt[myini.ReadString(tmp, 'Left', '1')[1]];
+        Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
+        Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
+        Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
         Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
       end;
 
@@ -649,7 +653,7 @@ begin
       if (x > 1) and (y < 3) then
 {</\} with game.Field_Cell[x - 1, y].Card do
         if Used and game.Field_Cell[x, y + 1].Card.Used then
-          if (ToInt[Right[1]] + ToInt[game.Field_Cell[x, y].Card.Left[1]]) = (ToInt[game.Field_Cell[x, y + 1].Card.Down[1]] + ToInt[game.Field_Cell[x, y].Card.Up[1]]) then
+          if (Right + game.Field_Cell[x, y].Card.Left) = (game.Field_Cell[x, y + 1].Card.Down + game.Field_Cell[x, y].Card.Up) then
             begin
               if (x > 1) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -670,7 +674,7 @@ begin
       if (x > 1) and (y > 1) then
 {<\/} with game.Field_Cell[x - 1, y].Card do
         if Used and game.Field_Cell[x, y - 1].Card.Used then
-          if (ToInt[Right[1]] + ToInt[game.Field_Cell[x, y].Card.Left[1]]) = (ToInt[game.Field_Cell[x, y - 1].Card.Up[1]] + ToInt[game.Field_Cell[x, y].Card.Down[1]]) then
+          if (Right + game.Field_Cell[x, y].Card.Left) = (game.Field_Cell[x, y - 1].Card.Up + game.Field_Cell[x, y].Card.Down) then
             begin
               if (x > 1) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -691,7 +695,7 @@ begin
       if (x < 3) and (y < 3) then
 {/\>} with game.Field_Cell[x, y + 1].Card do
         if Used and game.Field_Cell[x + 1, y].Card.Used then
-          if (ToInt[Down[1]] + ToInt[game.Field_Cell[x, y].Card.Up[1]]) = (ToInt[game.Field_Cell[x + 1, y].Card.Left[1]] + ToInt[game.Field_Cell[x, y].Card.Right[1]]) then
+          if (Down + game.Field_Cell[x, y].Card.Up) = (game.Field_Cell[x + 1, y].Card.Left + game.Field_Cell[x, y].Card.Right) then
             begin
               if (y < 3) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -712,7 +716,7 @@ begin
       if (x < 3) and (y > 1) then
 {>\/} with game.Field_Cell[x + 1, y].Card do
         if Used and game.Field_Cell[x, y - 1].Card.Used then
-          if (ToInt[Left[1]] + ToInt[game.Field_Cell[x, y].Card.Right[1]]) = (ToInt[game.Field_Cell[x, y - 1].Card.Up[1]] + ToInt[game.Field_Cell[x, y].Card.Down[1]]) then
+          if (Left + game.Field_Cell[x, y].Card.Right) = (game.Field_Cell[x, y - 1].Card.Up + game.Field_Cell[x, y].Card.Down) then
             begin
               if (x < 3) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -733,7 +737,7 @@ begin
       if x = 2 then
 {<>}  with game.Field_Cell[x - 1, y].Card do
         if Used and game.Field_Cell[x + 1, y].Card.Used then
-          if (ToInt[Right[1]] + ToInt[game.Field_Cell[x, y].Card.Left[1]]) = (ToInt[game.Field_Cell[x + 1, y].Card.Left[1]] + ToInt[game.Field_Cell[x, y].Card.Right[1]]) then
+          if (Right + game.Field_Cell[x, y].Card.Left) = (game.Field_Cell[x + 1, y].Card.Left + game.Field_Cell[x, y].Card.Right) then
             begin
               if (x > 1) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -754,7 +758,7 @@ begin
       if y = 2 then
 {/\\/}with game.Field_Cell[x, y + 1].Card do
         if Used and game.Field_Cell[x, y - 1].Card.Used then
-          if (ToInt[Down[1]] + ToInt[game.Field_Cell[x, y].Card.Up[1]]) = (ToInt[game.Field_Cell[x, y - 1].Card.Up[1]] + ToInt[game.Field_Cell[x, y].Card.Down[1]]) then
+          if (Down + game.Field_Cell[x, y].Card.Up) = (game.Field_Cell[x, y - 1].Card.Up + game.Field_Cell[x, y].Card.Down) then
             begin
               if (y < 3) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -779,7 +783,7 @@ begin
     begin
       with game.Field_Cell[x - 1, y].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (x > 1) then
-          if (ToInt[Right[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Left[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Right + Bonus) < (game.Field_Cell[x, y].Card.Left + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
@@ -789,7 +793,7 @@ begin
             end;
       with game.Field_Cell[x + 1, y].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (x < 3) then
-          if (ToInt[Left[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Right[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Left + Bonus) < (game.Field_Cell[x, y].Card.Right + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
@@ -799,7 +803,7 @@ begin
             end;
       with game.Field_Cell[x, y - 1].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (y > 1) then
-          if (ToInt[Up[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Down[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Up + Bonus) < (game.Field_Cell[x, y].Card.Down + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
@@ -809,7 +813,7 @@ begin
             end;
       with game.Field_Cell[x, y + 1].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (y < 3) then
-          if (ToInt[Down[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Up[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Down + Bonus) < (game.Field_Cell[x, y].Card.Up + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);

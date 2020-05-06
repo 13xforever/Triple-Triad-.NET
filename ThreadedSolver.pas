@@ -8,7 +8,8 @@ type
     ID: string[14];
     Used, Our: Boolean;
     Bonus: Shortint;
-    Left, Up, Right, Down, Element: string[1];
+    Left, Up, Right, Down: byte;
+    Element: string[1];
   end;
   TCellInfo = record
     Element: string[1];
@@ -45,6 +46,7 @@ type
 
 var
   ToInt: array ['1'..'A'] of byte;
+  FromInt: array [1..10] of char;
 
 implementation
 uses MainForm;
@@ -69,9 +71,6 @@ begin
   RuleSame := rs;
   RuleSameWall := rsw;
   RuleElemental := re;
-  for i := 1 to 9 do
-    ToInt[Chr(Ord('0') + i)] := i;
-  ToInt['A'] := 10;
 end;
 
 procedure TMyThread.Execute;
@@ -318,7 +317,7 @@ begin
       if (x > 1) and (y < 3) then
 {</\} with game.Field_Cell[x - 1, y].Card do
         if Used and game.Field_Cell[x, y + 1].Card.Used then
-          if (ToInt[Right[1]] + ToInt[game.Field_Cell[x, y].Card.Left[1]]) = (ToInt[game.Field_Cell[x, y + 1].Card.Down[1]] + ToInt[game.Field_Cell[x, y].Card.Up[1]]) then
+          if (Right + game.Field_Cell[x, y].Card.Left) = (game.Field_Cell[x, y + 1].Card.Down + game.Field_Cell[x, y].Card.Up) then
             begin
               if (x > 1) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -339,7 +338,7 @@ begin
       if (x > 1) and (y > 1) then
 {<\/} with game.Field_Cell[x - 1, y].Card do
         if Used and game.Field_Cell[x, y - 1].Card.Used then
-          if (ToInt[Right[1]] + ToInt[game.Field_Cell[x, y].Card.Left[1]]) = (ToInt[game.Field_Cell[x, y - 1].Card.Up[1]] + ToInt[game.Field_Cell[x, y].Card.Down[1]]) then
+          if (Right + game.Field_Cell[x, y].Card.Left) = (game.Field_Cell[x, y - 1].Card.Up + game.Field_Cell[x, y].Card.Down) then
             begin
               if (x > 1) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -360,7 +359,7 @@ begin
       if (x < 3) and (y < 3) then
 {/\>} with game.Field_Cell[x, y + 1].Card do
         if Used and game.Field_Cell[x + 1, y].Card.Used then
-          if (ToInt[Down[1]] + ToInt[game.Field_Cell[x, y].Card.Up[1]]) = (ToInt[game.Field_Cell[x + 1, y].Card.Left[1]] + ToInt[game.Field_Cell[x, y].Card.Right[1]]) then
+          if (Down + game.Field_Cell[x, y].Card.Up) = (game.Field_Cell[x + 1, y].Card.Left + game.Field_Cell[x, y].Card.Right) then
             begin
               if (y < 3) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -381,7 +380,7 @@ begin
       if (x < 3) and (y > 1) then
 {>\/} with game.Field_Cell[x + 1, y].Card do
         if Used and game.Field_Cell[x, y - 1].Card.Used then
-          if (ToInt[Left[1]] + ToInt[game.Field_Cell[x, y].Card.Right[1]]) = (ToInt[game.Field_Cell[x, y - 1].Card.Up[1]] + ToInt[game.Field_Cell[x, y].Card.Down[1]]) then
+          if (Left + game.Field_Cell[x, y].Card.Right) = (game.Field_Cell[x, y - 1].Card.Up + game.Field_Cell[x, y].Card.Down) then
             begin
               if (x < 3) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -402,7 +401,7 @@ begin
       if x = 2 then
 {<>}  with game.Field_Cell[x - 1, y].Card do
         if Used and game.Field_Cell[x + 1, y].Card.Used then
-          if (ToInt[Right[1]] + ToInt[game.Field_Cell[x, y].Card.Left[1]]) = (ToInt[game.Field_Cell[x + 1, y].Card.Left[1]] + ToInt[game.Field_Cell[x, y].Card.Right[1]]) then
+          if (Right + game.Field_Cell[x, y].Card.Left) = (game.Field_Cell[x + 1, y].Card.Left + game.Field_Cell[x, y].Card.Right) then
             begin
               if (x > 1) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -423,7 +422,7 @@ begin
       if y = 2 then
 {/\\/}with game.Field_Cell[x, y + 1].Card do
         if Used and game.Field_Cell[x, y - 1].Card.Used then
-          if (ToInt[Down[1]] + ToInt[game.Field_Cell[x, y].Card.Up[1]]) = (ToInt[game.Field_Cell[x, y - 1].Card.Up[1]] + ToInt[game.Field_Cell[x, y].Card.Down[1]]) then
+          if (Down + game.Field_Cell[x, y].Card.Up) = (game.Field_Cell[x, y - 1].Card.Up + game.Field_Cell[x, y].Card.Down) then
             begin
               if (y < 3) and (Our <> game.Field_Cell[x, y].Card.Our) then
                 begin
@@ -448,7 +447,7 @@ begin
     begin
       with game.Field_Cell[x - 1, y].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (x > 1) then
-          if (ToInt[Right[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Left[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Right + Bonus) < (game.Field_Cell[x, y].Card.Left + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
@@ -458,7 +457,7 @@ begin
             end;
       with game.Field_Cell[x + 1, y].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (x < 3) then
-          if (ToInt[Left[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Right[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Left + Bonus) < (game.Field_Cell[x, y].Card.Right + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
@@ -468,7 +467,7 @@ begin
             end;
       with game.Field_Cell[x, y - 1].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (y > 1) then
-          if (ToInt[Up[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Down[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Up + Bonus) < (game.Field_Cell[x, y].Card.Down + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
@@ -478,7 +477,7 @@ begin
             end;
       with game.Field_Cell[x, y + 1].Card do
         if Used and (Our <> game.Field_Cell[x, y].Card.Our) and (y < 3) then
-          if (ToInt[Down[1]] + Bonus) < (ToInt[game.Field_Cell[x, y].Card.Up[1]] + game.Field_Cell[x, y].Card.Bonus) then
+          if (Down + Bonus) < (game.Field_Cell[x, y].Card.Up + game.Field_Cell[x, y].Card.Bonus) then
             begin
               Our := game.Field_Cell[x, y].Card.Our;
               Inc(Score[Our]);
