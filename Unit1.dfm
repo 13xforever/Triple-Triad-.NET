@@ -50,6 +50,15 @@ object fMain: TfMain
     Font.Style = []
     ParentFont = False
   end
+  object bMove1: TButton
+    Left = 136
+    Top = 528
+    Width = 193
+    Height = 49
+    Caption = '<-- Make a move (AI)'
+    TabOrder = 2
+    OnClick = bMove1Click
+  end
   object gCardBox1: TGroupBox
     Left = 8
     Top = 8
@@ -58,7 +67,7 @@ object fMain: TfMain
     Anchors = [akLeft, akTop, akBottom]
     Caption = 'Opponent'
     DockSite = True
-    TabOrder = 6
+    TabOrder = 5
     object gCard1: TGroupBox
       Tag = 1
       Left = 8
@@ -616,7 +625,7 @@ object fMain: TfMain
     Anchors = [akTop, akRight, akBottom]
     Caption = 'Player'
     DockSite = True
-    TabOrder = 7
+    TabOrder = 6
     object gCard10: TGroupBox
       Tag = 10
       Left = 8
@@ -1174,7 +1183,7 @@ object fMain: TfMain
     Width = 401
     Height = 433
     Caption = 'Play Field'
-    TabOrder = 8
+    TabOrder = 7
     object Field13: TGroupBox
       Tag = 13
       Left = 8
@@ -1477,7 +1486,7 @@ object fMain: TfMain
     Left = 136
     Top = 448
     Width = 193
-    Height = 129
+    Height = 73
     Caption = 'Rules'
     TabOrder = 3
     object cElemental: TCheckBox
@@ -1490,12 +1499,13 @@ object fMain: TfMain
       OnClick = cElementalClick
     end
     object cSame: TCheckBox
-      Left = 8
-      Top = 72
+      Left = 88
+      Top = 24
       Width = 97
       Height = 17
       Caption = 'Same'
       TabOrder = 1
+      OnClick = cSameClick
     end
     object cPlus: TCheckBox
       Left = 8
@@ -1506,54 +1516,35 @@ object fMain: TfMain
       TabOrder = 2
     end
     object cSameWall: TCheckBox
-      Left = 8
-      Top = 96
+      Left = 88
+      Top = 48
       Width = 97
       Height = 17
       Caption = 'Same Wall'
       TabOrder = 3
       OnClick = cSameWallClick
     end
-    object bCardEditor: TButton
-      Left = 120
-      Top = 24
-      Width = 65
-      Height = 89
-      Caption = 'Add New Card'
-      TabOrder = 4
-      WordWrap = True
-      OnClick = bCardEditorClick
-    end
-  end
-  object bMove1: TButton
-    Left = 184
-    Top = 584
-    Width = 145
-    Height = 41
-    Caption = '<-- Make a move (AI)'
-    TabOrder = 2
-    OnClick = bMove1Click
   end
   object bMove2: TButton
     Left = 344
-    Top = 584
-    Width = 145
-    Height = 41
+    Top = 528
+    Width = 185
+    Height = 49
     Caption = 'Find optimal move -->'
     TabOrder = 1
     OnClick = bMove2Click
   end
   object bReset: TButton
-    Left = 336
-    Top = 512
-    Width = 201
-    Height = 65
+    Left = 280
+    Top = 600
+    Width = 97
+    Height = 25
     Caption = 'New Game'
     TabOrder = 0
     OnClick = FormCreate
   end
   object bStatistics: TButton
-    Left = 336
+    Left = 440
     Top = 456
     Width = 97
     Height = 25
@@ -1561,21 +1552,22 @@ object fMain: TfMain
     TabOrder = 4
     OnClick = bStatisticsClick
   end
-  object bShowRules: TButton
-    Left = 440
+  object cRandomize: TCheckBox
+    Left = 384
+    Top = 608
+    Width = 97
+    Height = 17
+    Caption = 'Randomize'
+    TabOrder = 8
+  end
+  object bCardEditor: TButton
+    Left = 336
     Top = 456
     Width = 97
     Height = 25
-    Caption = 'Manual'
-    TabOrder = 5
-    OnClick = bShowRulesClick
-  end
-  object cRandomize: TCheckBox
-    Left = 336
-    Top = 488
-    Width = 201
-    Height = 17
-    Caption = 'Random Game'
+    Caption = 'Add New Card'
     TabOrder = 9
+    WordWrap = True
+    OnClick = bCardEditorClick
   end
 end

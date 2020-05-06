@@ -124,11 +124,10 @@ type
     lEffect11: TLabel;
     lEffect21: TLabel;
     lEffect31: TLabel;
-    bCardEditor: TButton;
     bReset: TButton;
     bStatistics: TButton;
-    bShowRules: TButton;
     cRandomize: TCheckBox;
+    bCardEditor: TButton;
     procedure FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer);
     procedure SelectCard(Sender: TObject);
@@ -143,8 +142,8 @@ type
     procedure bMove1Click(Sender: TObject);
     procedure bMove2Click(Sender: TObject);
     procedure bStatisticsClick(Sender: TObject);
-    procedure bShowRulesClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure cSameClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -315,11 +314,20 @@ begin
   fCardEditor.ShowModal
 end;
 
+
+procedure TfMain.cSameClick(Sender: TObject);
+begin
+  if not cSame.Checked then
+    cSameWall.Checked := False;
+end;
+
 procedure TfMain.cSameWallClick(Sender: TObject);
 var
   j: byte;
 begin
   //Move w/ or w/o Same Wall Rule
+  if (cSameWall.Checked) then
+    cSame.Checked := True;
   for j := 1 to 3 do
     begin
       CurrentGame.Field_Cell[j, 0].Card.Used := cSameWall.Checked;
@@ -1051,7 +1059,7 @@ begin
   for i := 1 to 5 do
     begin
       threads[i].WaitFor;
-      //threads[i].Free;
+      threads[i].Free;
     end;
 
   for k := 1 to 5 do
@@ -1070,7 +1078,6 @@ begin
   MoveToID := IntToStr(local_stat[0] div 10) + IntToStr(local_stat[0] mod 10);
   MoveToCardID := PlayerHand[k].ID;
   ProposeStr := MoveToCardID + ' into the ' + CellToWord[local_stat[0] div 10, local_stat[0] mod 10];
-//  MessageBox(Handle, pChar('Рекомендуется ходить ' + ProposeStr), 'Рекомендуемый ход', MB_OK + MB_ICONINFORMATION);
 
   gCardBox1.Enabled := True;
   gCardBox2.Enabled := True;
@@ -1079,11 +1086,6 @@ begin
   bMove1.Enabled := True;
   bMove2.Enabled := True;
   bReset.Enabled := True
-end;
-
-procedure TfMain.bShowRulesClick(Sender: TObject);
-begin
-  ShellExecute(Handle, 'open', 'Rules.htm', nil, nil, SW_NORMAL)
 end;
 
 procedure TfMain.FormShow(Sender: TObject);
