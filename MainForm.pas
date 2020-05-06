@@ -180,7 +180,7 @@ const
                                               ('lower right corner', 'middle right cell', 'upper right corner'));
 
 var
-  OpponentHand, PlayerHand: THandInfo;
+  OpponentHand, PlayerHand, LastHand: THandInfo;
   CurrentGame: TGameInfo;
   CurrentStat: TStat = (0, 0, 0, 0);
   Score: TScore = (5, 5);
@@ -270,7 +270,7 @@ begin
           tmp := tmp2[k];
           with (FindComponent('gCard' + id) as TGroupBox) do
             begin
-              Caption := tmp;
+              Caption := StringReplace(tmp, '&', '&&', []);
               DragMode := dmAutomatic
             end;
           (FindComponent('lLeft' + id) as TLabel).Caption := myini.ReadString(tmp, 'Left', '');
@@ -279,18 +279,21 @@ begin
           (FindComponent('lDown' + id) as TLabel).Caption := myini.ReadString(tmp, 'Down', '');
           (FindComponent('lElement' + id) as TLabel).Caption := ToElement[myini.ReadInteger(tmp, 'Element', 0)];
           if i > 5 then
-            with PlayerHand[i - 5] do
-              begin
-                ID := tmp;
-                Used := False;
-                Our := True;
-                Bonus := 0;
-                Left := myini.ReadString(tmp, 'Left', '');
-                Up := myini.ReadString(tmp, 'Up', '');
-                Right := myini.ReadString(tmp, 'Right', '');
-                Down := myini.ReadString(tmp, 'Down', '');
-                Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
-              end
+            begin
+              with PlayerHand[i - 5] do
+                begin
+                  ID := tmp;
+                  Used := False;
+                  Our := True;
+                  Bonus := 0;
+                  Left := myini.ReadString(tmp, 'Left', '');
+                  Up := myini.ReadString(tmp, 'Up', '');
+                  Right := myini.ReadString(tmp, 'Right', '');
+                  Down := myini.ReadString(tmp, 'Down', '');
+                  Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
+                end;
+              LastHand[i - 5] := PlayerHand[i - 5];
+            end
           else
             with OpponentHand[i] do
               begin
@@ -307,10 +310,25 @@ begin
         end;
         tmp2.Free;
         myini.Free
-    end;
+    end
+  else if not FirstPass then
+    for i := 1 to 5 do
+      begin
+          id := IntToStr(i + 5);
+          with (FindComponent('gCard' + id) as TGroupBox) do
+            begin
+              Caption := StringReplace(LastHand[i].ID, '&', '&&', []);
+              DragMode := dmAutomatic
+            end;
+          (FindComponent('lLeft' + id) as TLabel).Caption := LastHand[i].Left;
+          (FindComponent('lUp' + id) as TLabel).Caption := LastHand[i].Up;
+          (FindComponent('lRight' + id) as TLabel).Caption := LastHand[i].Right;
+          (FindComponent('lDown' + id) as TLabel).Caption := LastHand[i].Down;
+          (FindComponent('lElement' + id) as TLabel).Caption := LastHand[i].Element;
+      end;
   if FirstPass then
     begin
-      cRandomize.Checked := true;
+      cRandomize.Checked := false;
       FirstPass := false
     end;
   bMove1.Enabled := true;
@@ -357,6 +375,7 @@ procedure TfMain.SelectCard(Sender: TObject);
 var
   myini: TINIFile;
   id, tmp: string;
+  i: byte;
 begin
   fSelectCard.Left := Mouse.CursorPos.X;
   fSelectCard.Top := Mouse.CursorPos.Y;
@@ -377,18 +396,22 @@ begin
   (FindComponent('lElement' + id) as TLabel).Caption := ToElement[myini.ReadInteger(tmp, 'Element', 0)];
 
   if (Sender as TLabel).Tag > 5 then
-    with PlayerHand[(Sender as TLabel).Tag - 5] do
-      begin
-        ID := tmp;
-        Used := False;
-        Our := True;
-        Bonus := 0;
-        Left := myini.ReadString(tmp, 'Left', '');
-        Up := myini.ReadString(tmp, 'Up', '');
-        Right := myini.ReadString(tmp, 'Right', '');
-        Down := myini.ReadString(tmp, 'Down', '');
-        Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
-      end
+    begin
+      i := (Sender as TLabel).Tag - 5;
+      with PlayerHand[i] do
+        begin
+          ID := tmp;
+          Used := False;
+          Our := True;
+          Bonus := 0;
+          Left := myini.ReadString(tmp, 'Left', '');
+          Up := myini.ReadString(tmp, 'Up', '');
+          Right := myini.ReadString(tmp, 'Right', '');
+          Down := myini.ReadString(tmp, 'Down', '');
+          Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
+        end;
+      LastHand[i] := PlayerHand[i]
+    end
   else
     with OpponentHand[(Sender as TLabel).Tag] do
       begin
