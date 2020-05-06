@@ -2,12 +2,12 @@ program Triple_Triad;
 
 uses
   Forms,
-  Unit1 in 'Unit1.pas' {fMain},
-  Unit2 in 'Unit2.pas' {fCardEditor},
-  Unit3 in 'Unit3.pas' {fSelectCard},
-  Unit4 in 'Unit4.pas' {fSelectElement},
-  Unit5 in 'Unit5.pas' {fStat},
-  Unit6 in 'Unit6.pas';
+  MainForm in 'MainForm.pas' {fMain},
+  CardEditorForm in 'CardEditorForm.pas' {fCardEditor},
+  CardSelectForm in 'CardSelectForm.pas' {fSelectCard},
+  ElementSelectForm in 'ElementSelectForm.pas' {fSelectElement},
+  StatsForm in 'StatsForm.pas' {fStat},
+  ThreadedSolver in 'ThreadedSolver.pas';
 
 {$R *.res}
 

@@ -1,4 +1,4 @@
-unit Unit6;
+unit ThreadedSolver;
 
 interface
 uses
@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses Unit1;
+uses MainForm;
 
 constructor TMyThread.Create(const game: TGameInfo; const score: TScore; plh, oph: THandInfo; const plmove: boolean; var stat: TStat; const lvl, tid: byte; const rpl, rs, rsw, re: boolean);
 var

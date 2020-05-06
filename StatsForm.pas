@@ -1,4 +1,4 @@
-unit Unit5;
+unit StatsForm;
 
 interface
 
@@ -86,7 +86,7 @@ var
 
 implementation
 
-uses Unit1;
+uses MainForm;
 
 {$R *.dfm}
 

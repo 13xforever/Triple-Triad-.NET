@@ -1,4 +1,4 @@
-unit Unit1;
+unit MainForm;
 
 interface
 {$DEFINE NEW}
@@ -7,7 +7,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Menus, Unit6;
+  Dialogs, StdCtrls, ExtCtrls, Menus, ThreadedSolver;
 
 const
   clOpponent = $00CAA6F0;
@@ -159,7 +159,7 @@ var
 
 implementation
 
-uses INIFiles, ShellAPI, Unit2, Unit3, Unit4, Unit5;
+uses INIFiles, ShellAPI, CardEditorForm, CardSelectForm, ElementSelectForm, StatsForm;
 {$R *.dfm}
 {$R manifest.res}
 
