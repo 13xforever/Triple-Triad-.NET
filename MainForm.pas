@@ -7,7 +7,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Menus, ThreadedSolver;
+  Dialogs, StdCtrls, ExtCtrls, Menus, ThreadedSolver, SyncObjs;
 
 const
   clOpponent = $00CAA6F0;
@@ -128,8 +128,7 @@ type
     bStatistics: TButton;
     cRandomize: TCheckBox;
     bCardEditor: TButton;
-    procedure FormDockDrop(Sender: TObject; Source: TDragDockObject; X,
-      Y: Integer);
+    procedure FormDockDrop(Sender: TObject; Source: TDragDockObject; X, Y: Integer);
     procedure SelectCard(Sender: TObject);
     procedure bCardEditorClick(Sender: TObject);
     procedure SelectElement(Sender: TObject);
@@ -156,6 +155,7 @@ var
   Thinking: Boolean;
   CurHandStat: THandStat;
   CurGameStat: TGameInfo;
+  WriteLock: TCriticalSection;
 
 implementation
 
@@ -185,6 +185,7 @@ var
   tmp2: TStrings;
 begin
   Randomize;
+  WriteLock := TCriticalSection.Create;
   Thinking := false;
   for i := 1 to 9 do
     ToInt[Chr(Ord('0') + i)] := i;
@@ -1055,11 +1056,18 @@ begin
   for i := 1 to 5 do
     begin
       threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
+      threads[i].WaitFor;
     end;
   for i := 1 to 5 do
     begin
+      while not threads[i].Completed do
+        begin
+          Application.ProcessMessages;
+          SysUtils.Sleep(10);
+        end;
       threads[i].WaitFor;
-      threads[i].Free;
+      //local_stat := threads[i].LocalStat;
+      //threads[i].Free;
     end;
 
   for k := 1 to 5 do

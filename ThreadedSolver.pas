@@ -27,10 +27,8 @@ type
 type
   TMyThread = class(TThread)
   private
-    LocalScore: TScore;
     PlayerHand, OpponentHand: THandInfo;
     PlayerMove: boolean;
-    LocalStat: TStat;
     LocalLvl, LocalThreadId: byte;
     RulePlus, RuleSame, RuleSameWall, RuleElemental: boolean;
   protected
@@ -38,6 +36,10 @@ type
     procedure FindMove(const game: TGameInfo; const score: TScore; plh, oph: THandInfo; const plmove: boolean; var stat: TStat; const lvl: byte);
     procedure MakeMove(var game: TGameInfo; const x, y: byte; var Score: TScore; var Stat: TStat; const combo: boolean = False);
   public
+    Completed: boolean;
+    LocalScore: TScore;
+    LocalStat: TStat;
+    LocalCurHandStat: TStat;
     constructor Create(const game: TGameInfo; const score: TScore; plh, oph: THandInfo; const plmove: boolean; var stat: TStat; const lvl, tid: byte; const rpl, rs, rsw, re: boolean);
   end;
 
@@ -45,7 +47,6 @@ var
   ToInt: array ['1'..'A'] of byte;
 
 implementation
-
 uses MainForm;
 
 constructor TMyThread.Create(const game: TGameInfo; const score: TScore; plh, oph: THandInfo; const plmove: boolean; var stat: TStat; const lvl, tid: byte; const rpl, rs, rsw, re: boolean);
@@ -53,6 +54,10 @@ var
   i: byte;
 begin
   inherited Create(false);
+  Completed := False;
+
+  LocalCurHandStat := CurHandStat[tid];
+
   LocalScore := score;
   PlayerHand := plh;
   OpponentHand := oph;
@@ -72,6 +77,7 @@ end;
 procedure TMyThread.Execute;
 begin
   FindMove(CurGameStat, LocalScore, PlayerHand, OpponentHand, PlayerMove, LocalStat, LocalLvl);
+  Completed := True;
 end;
 
 procedure TMyThread.FindMove(const game: TGameInfo; const score: TScore; plh, oph: THandInfo; const plmove: boolean; var stat: TStat; const lvl: byte);
@@ -80,7 +86,9 @@ var
   local_game: TGameInfo;
   local_score: TScore;
 begin
-  //CurGameStat := game;
+  WriteLock.Acquire;
+  CurGameStat := game;
+  WriteLock.Release;
   if plmove then
     for i := 1 to 5 do
       if (not plh[i].Used) and ((lvl > 0) or (i = LocalThreadId)) then
@@ -114,14 +122,18 @@ begin
                   FindMove(local_game, local_score, plh, oph, not plmove, stat, lvl + 1);
                 plh[i].Used := False;
                 if lvl = 0 then
-                  if CurHandStat[i][0] <> 0 then
-                    if (stat[1] < CurHandStat[i][1]) or (stat[3] > CurHandStat[i][3]) then
-                      for l := 0 to 3 do
-                        CurHandStat[i][l] := stat[l]
+                  begin
+                    WriteLock.Acquire;
+                    if LocalCurHandStat[0] <> 0 then
+                      if (stat[1] < LocalCurHandStat[1]) or (stat[3] > LocalCurHandStat[3]) then
+                        for l := 0 to 3 do
+                          LocalCurHandStat[l] := stat[l]
+                      else
                     else
-                  else
-                    for l := 0 to 3 do
-                      CurHandStat[i][l] := stat[l]
+                      for l := 0 to 3 do
+                        LocalCurHandStat[l] := stat[l];
+                    WriteLock.Release;
+                  end
               end
             else
       else
@@ -158,14 +170,18 @@ begin
                   FindMove(local_game, local_score, plh, oph, not plmove, stat, lvl + 1);
                 oph[i].Used := False;
                 if lvl = 0 then
-                  if CurHandStat[i][0] <> 0 then
-                    if (stat[3] < CurHandStat[i][3]) or (stat[1] > CurHandStat[i][1]) then
-                      for l := 0 to 3 do
-                        CurHandStat[i][l] := stat[l]
+                  begin
+                    WriteLock.Acquire;
+                    if LocalCurHandStat[0] <> 0 then
+                      if (stat[3] < LocalCurHandStat[3]) or (stat[1] > LocalCurHandStat[1]) then
+                        for l := 0 to 3 do
+                          LocalCurHandStat[l] := stat[l]
+                      else
                     else
-                  else
-                    for l := 0 to 3 do
-                      CurHandStat[i][l] := stat[l]
+                      for l := 0 to 3 do
+                        LocalCurHandStat[l] := stat[l];
+                    WriteLock.Release;
+                  end
               end
 end;
 
