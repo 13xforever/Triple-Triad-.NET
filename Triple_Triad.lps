@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="11"/>
-    <BuildModes Active="Default"/>
+    <BuildModes Active="Release"/>
     <Units Count="7">
       <Unit0>
         <Filename Value="Triple_Triad.lpr"/>
@@ -18,7 +18,6 @@
         <ComponentName Value="fMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="1144"/>
         <CursorPos X="100" Y="1154"/>
@@ -34,6 +33,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="3"/>
+        <CursorPos X="21" Y="8"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -45,6 +45,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="4"/>
+        <CursorPos X="21" Y="8"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -55,7 +56,9 @@
         <ComponentName Value="fSelectElement"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
+        <CursorPos X="21" Y="8"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -82,7 +85,7 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit6>
     </Units>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="Triple_Triad.lpr"/>
       </Position1>
@@ -188,6 +191,18 @@
         <Filename Value="MainForm.pas"/>
         <Caret Line="532" Column="38" TopLine="520"/>
       </Position27>
+      <Position28>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="1154" Column="100" TopLine="1144"/>
+      </Position28>
+      <Position29>
+        <Filename Value="CardEditorForm.pas"/>
+        <Caret Line="8" Column="21"/>
+      </Position29>
+      <Position30>
+        <Filename Value="CardSelectForm.pas"/>
+        <Caret Line="8" Column="21"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
