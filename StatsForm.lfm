@@ -13,17 +13,12 @@ object fStat: TfStat
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsStayOnTop
-  OldCreateOrder = False
   Visible = True
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnHide = FormHide
   OnShow = FormShow
-  DesignSize = (
-    281
-    433)
   PixelsPerInch = 96
-  TextHeight = 13
   object Label1: TLabel
     Left = 8
     Top = 328
@@ -350,9 +345,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 0
-    DesignSize = (
-      89
-      89)
     object color13: TShape
       Tag = 1
       Left = 8
@@ -380,9 +372,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 1
-    DesignSize = (
-      89
-      89)
     object color23: TShape
       Tag = 1
       Left = 8
@@ -436,9 +425,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 3
-    DesignSize = (
-      89
-      89)
     object color12: TShape
       Tag = 1
       Left = 8
@@ -466,9 +452,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 4
-    DesignSize = (
-      89
-      89)
     object color22: TShape
       Tag = 1
       Left = 8
@@ -496,9 +479,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 5
-    DesignSize = (
-      89
-      89)
     object color32: TShape
       Tag = 1
       Left = 8
@@ -526,9 +506,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 6
-    DesignSize = (
-      89
-      89)
     object color11: TShape
       Tag = 1
       Left = 8
@@ -556,9 +533,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 7
-    DesignSize = (
-      89
-      89)
     object color21: TShape
       Tag = 1
       Left = 8
@@ -586,9 +560,6 @@ object fStat: TfStat
     Height = 89
     Anchors = [akLeft, akBottom]
     TabOrder = 8
-    DesignSize = (
-      89
-      89)
     object color31: TShape
       Tag = 1
       Left = 8

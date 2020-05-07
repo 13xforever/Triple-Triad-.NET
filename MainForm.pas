@@ -1,12 +1,14 @@
 unit MainForm;
 
+{$MODE Delphi}
+
 interface
 {$DEFINE NEW}
 {$DEFINE ALTCHECK}
 {$DEFINE NOCHECK}
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  LCLIntf, LCLType, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Menus, ThreadedSolver, SyncObjs;
 
 const
@@ -170,8 +172,8 @@ var
 
 implementation
 
-uses INIFiles, ShellAPI, CardEditorForm, CardSelectForm, ElementSelectForm, StatsForm;
-{$R *.dfm}
+uses INIFiles, CardEditorForm, CardSelectForm, ElementSelectForm, StatsForm;
+{$R *.lfm}
 {$R manifest.res}
 
 const
@@ -1036,6 +1038,7 @@ begin
   for i := 1 to 5 do
     for j := 0 to 3 do
       CurHandStat[i][j] := 0;
+  local_stat := CurHandStat[1];
   ProposeStr := '';
   MoveToID := '';
   if UseMT then
@@ -1111,6 +1114,7 @@ begin
   for i := 1 to 5 do
     for j := 0 to 3 do
       CurHandStat[i][j] := 0;
+  local_stat := CurHandStat[1];
   ProposeStr := '';
   MoveToID := '';
   MoveToCardID := '';

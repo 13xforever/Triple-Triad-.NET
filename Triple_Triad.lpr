@@ -1,7 +1,9 @@
 program Triple_Triad;
 
+{$MODE Delphi}
+
 uses
-  Forms,
+  Forms, Interfaces,
   MainForm in 'MainForm.pas' {fMain},
   CardEditorForm in 'CardEditorForm.pas' {fCardEditor},
   CardSelectForm in 'CardSelectForm.pas' {fSelectCard},

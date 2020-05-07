@@ -1,9 +1,11 @@
 unit ElementSelectForm;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls;
 
 type
@@ -23,7 +25,7 @@ var
   fSelectElement: TfSelectElement;
 
 implementation
-{$R *.dfm}
+{$R *.lfm}
 
 procedure TfSelectElement.bOKClick(Sender: TObject);
 begin

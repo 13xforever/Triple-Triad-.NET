@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="7">
+      <Unit0>
+        <Filename Value="Triple_Triad.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="MainForm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="1017"/>
+        <CursorPos X="15" Y="1042"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="CardEditorForm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="20"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="CardSelectForm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="20"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="ElementSelectForm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="20"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="StatsForm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="21" Y="8"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="ThreadedSolver.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="20"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit6>
+    </Units>
+    <JumpHistory Count="13" HistoryIndex="12">
+      <Position1>
+        <Filename Value="Triple_Triad.lpr"/>
+      </Position1>
+      <Position2>
+        <Filename Value="StatsForm.pas"/>
+        <Caret Line="8" Column="32"/>
+      </Position2>
+      <Position3>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="142" Column="70" TopLine="120"/>
+      </Position3>
+      <Position4>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="1047" Column="110" TopLine="1007"/>
+      </Position4>
+      <Position5>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="1123" Column="109" TopLine="1102"/>
+      </Position5>
+      <Position6>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="11" Column="21"/>
+      </Position6>
+      <Position7>
+        <Filename Value="StatsForm.pas"/>
+        <Caret Line="8" Column="21"/>
+      </Position7>
+      <Position8>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="142" Column="75" TopLine="120"/>
+      </Position8>
+      <Position9>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="469" Column="78" TopLine="447"/>
+      </Position9>
+      <Position10>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="142" Column="70" TopLine="142"/>
+      </Position10>
+      <Position11>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="1062" Column="10" TopLine="1032"/>
+      </Position11>
+      <Position12>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="151" Column="20" TopLine="129"/>
+      </Position12>
+      <Position13>
+        <Filename Value="MainForm.pas"/>
+        <Caret Line="937" TopLine="916"/>
+      </Position13>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <SkipCheckLCLInterfaces Value="True"/>
+</CONFIG>

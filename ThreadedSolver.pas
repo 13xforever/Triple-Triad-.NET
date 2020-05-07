@@ -1,5 +1,7 @@
 unit ThreadedSolver;
 
+{$MODE Delphi}
+
 interface
 uses
   Classes;

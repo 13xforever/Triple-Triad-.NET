@@ -1,9 +1,11 @@
 unit StatsForm;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  LCLIntf, LCLType, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls;
 
 type
@@ -88,7 +90,7 @@ implementation
 
 uses MainForm, ThreadedSolver;
 
-{$R *.dfm}
+{$R *.lfm}
 
 procedure TfStat.Timer1Timer(Sender: TObject);
 var
