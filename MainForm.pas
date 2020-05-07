@@ -128,7 +128,6 @@ type
     bStatistics: TButton;
     cRandomize: TCheckBox;
     bCardEditor: TButton;
-    cMT: TCheckBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -166,6 +165,8 @@ var
   CurHandStat: THandStat;
   CurGameStat: TGameInfo;
   WriteLock: TCriticalSection;
+  UseMT: boolean;
+  Threads: array [1..5] of TMyThread;
 
 implementation
 
@@ -194,6 +195,7 @@ var
   tmp2: TStrings;
 begin
   Randomize;
+  UseMT := True;
   WriteLock := TCriticalSection.Create;
   Thinking := false;
   for i := 1 to 9 do
@@ -1027,7 +1029,7 @@ begin
   bMove1.Enabled := False;
   bMove2.Enabled := False;
   bReset.Enabled := False;
-  Thinking := true;
+  Thinking := True;
 
   local_game := CurrentGame;
   local_score := Score;
@@ -1036,7 +1038,26 @@ begin
       CurHandStat[i][j] := 0;
   ProposeStr := '';
   MoveToID := '';
-  FindMove(local_game, local_score, PlayerHand, OpponentHand, False, local_stat, 0);
+  if UseMT then
+    begin
+      for i := 1 to 5 do
+        begin
+          Threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, False, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
+        end;
+      for i := 1 to 5 do
+        begin
+          while not Threads[i].Completed do
+            begin
+              Application.ProcessMessages;
+              SysUtils.Sleep(10);
+            end;
+          Threads[i].WaitFor;
+          CurHandStat[i] := Threads[i].LocalCurHandStat;
+          Threads[i].Free;
+        end
+    end
+  else
+    FindMove(local_game, local_score, PlayerHand, OpponentHand, False, local_stat, 0);
 
   for k := 1 to 5 do
     if not OpponentHand[k].Used then
@@ -1059,7 +1080,7 @@ begin
   bMove1.Enabled := True;
   bMove2.Enabled := True;
   bReset.Enabled := True;
-  Thinking := false;
+  Thinking := False;
 end;
 
 procedure TfMain.bMove2Click(Sender: TObject);
@@ -1069,7 +1090,6 @@ var
   local_stat: TStat;
   i, j, k: byte;
   f: boolean;
-  threads: array [1..5] of TMyThread;
 begin
   f := false;
   for i := 1 to 5 do
@@ -1084,7 +1104,7 @@ begin
   bMove1.Enabled := False;
   bMove2.Enabled := False;
   bReset.Enabled := False;
-  Thinking := true;
+  Thinking := True;
 
   local_game := CurrentGame;
   local_score := Score;
@@ -1094,23 +1114,22 @@ begin
   ProposeStr := '';
   MoveToID := '';
   MoveToCardID := '';
-  if cMT.Checked then
+  if UseMT then
     begin
       for i := 1 to 5 do
         begin
-          threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
-          threads[i].WaitFor;
+          Threads[i] := TMyThread.Create(local_game, local_score, PlayerHand, OpponentHand, True, local_stat, 0, i, cPlus.Checked, cSame.Checked, cSameWall.Checked, cElemental.Checked);
         end;
       for i := 1 to 5 do
         begin
-          while not threads[i].Completed do
+          while not Threads[i].Completed do
             begin
               Application.ProcessMessages;
               SysUtils.Sleep(10);
             end;
-          threads[i].WaitFor;
-          //local_stat := threads[i].LocalStat;
-          //threads[i].Free;
+          Threads[i].WaitFor;
+          CurHandStat[i] := Threads[i].LocalCurHandStat;
+          Threads[i].Free;
         end
     end
   else
@@ -1139,7 +1158,7 @@ begin
   gRules.Enabled := True;
   bMove1.Enabled := True;
   bMove2.Enabled := True;
-  bReset.Enabled := True
+  bReset.Enabled := True;
 end;
 
 procedure TfMain.FormShow(Sender: TObject);

@@ -1,6 +1,6 @@
 object fStat: TfStat
-  Left = 309
-  Top = 123
+  Left = 1435
+  Top = 186
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsToolWindow
   Caption = 'Statistics'
@@ -614,7 +614,7 @@ object fStat: TfStat
     Top = 8
     Width = 265
     Height = 17
-    Caption = 'Refresh cells'
+    Caption = 'Search visualization'
     Checked = True
     State = cbChecked
     TabOrder = 9

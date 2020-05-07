@@ -1197,15 +1197,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label7: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '13'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1266,15 +1266,15 @@ object fMain: TfMain
       end
       object Label8: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '23'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1293,15 +1293,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label9: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '33'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1341,15 +1341,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label4: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '12'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1389,15 +1389,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label5: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '22'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1437,15 +1437,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label6: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '32'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1485,15 +1485,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label1: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '11'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1533,15 +1533,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label2: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '21'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1581,15 +1581,15 @@ object fMain: TfMain
       OnDockDrop = FormDockDrop
       object Label3: TLabel
         Left = 16
-        Top = 24
+        Top = 32
         Width = 97
-        Height = 97
+        Height = 89
         Alignment = taCenter
         AutoSize = False
         Caption = '31'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBtnHighlight
-        Font.Height = -85
+        Font.Height = -64
         Font.Name = 'Verdana'
         Font.Style = []
         ParentFont = False
@@ -1704,13 +1704,5 @@ object fMain: TfMain
     TabOrder = 9
     WordWrap = True
     OnClick = bCardEditorClick
-  end
-  object cMT: TCheckBox
-    Left = 344
-    Top = 504
-    Width = 185
-    Height = 17
-    Caption = 'Multi-Threading (Broken)'
-    TabOrder = 10
   end
 end
