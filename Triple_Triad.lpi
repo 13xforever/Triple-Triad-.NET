@@ -40,27 +40,37 @@
       <Unit1>
         <Filename Value="MainForm.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="fMain"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit1>
       <Unit2>
         <Filename Value="CardEditorForm.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="fCardEditor"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit2>
       <Unit3>
         <Filename Value="CardSelectForm.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="fSelectCard"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit3>
       <Unit4>
         <Filename Value="ElementSelectForm.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="fSelectElement"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit4>
       <Unit5>
         <Filename Value="StatsForm.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="fStat"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit5>
       <Unit6>
         <Filename Value="ThreadedSolver.pas"/>

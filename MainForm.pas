@@ -16,6 +16,9 @@ const
   clPlayer = clSkyBlue;
 
 type
+
+  { TfMain }
+
   TfMain = class(TForm)
     gCardBox1: TGroupBox;
     gCardBox2: TGroupBox;
@@ -460,10 +463,6 @@ begin
   else
     fStat.Show;
   fStat.Timer1.Enabled := fStat.Visible;
-  if fStat.Visible then
-    Left := (Screen.Width - (Width + fStat.Width)) div 2
-  else
-    Left := (Screen.Width - Width) div 2
 end;
 
 procedure TfMain.FormDockDrop(Sender: TObject; Source: TDragDockObject; X, Y: Integer);
@@ -1167,8 +1166,8 @@ end;
 
 procedure TfMain.FormShow(Sender: TObject);
 begin
-  Top := (Screen.Height - Height) div 2;
-  Left := (Screen.Width - (Width + fStat.Width)) div 2
+  fStat.Left := Left + Width + 20;
+  fStat.Top := Top + (Height - fStat.Height) div 2;
 end;
 
 end.
