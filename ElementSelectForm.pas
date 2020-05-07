@@ -32,8 +32,7 @@ begin
   Close
 end;
 
-procedure TfSelectElement.pElementKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TfSelectElement.pElementKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
     begin

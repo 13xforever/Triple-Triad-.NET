@@ -1,28 +1,25 @@
 object fSelectElement: TfSelectElement
   Left = 388
+  Height = 21
   Top = 128
+  Width = 161
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsToolWindow
   Caption = 'Element Select'
   ClientHeight = 21
   ClientWidth = 161
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  Font.Style = []
   OnShow = FormShow
-  PixelsPerInch = 96
+  LCLVersion = '2.0.6.0'
   object pElement: TComboBox
     Left = 0
+    Height = 21
     Top = 0
     Width = 137
-    Height = 21
-    Style = csDropDownList
     ItemHeight = 13
-    TabOrder = 0
-    OnKeyPress = pElementKeyPress
     Items.Strings = (
       ''
       'Fire'
@@ -32,15 +29,19 @@ object fSelectElement: TfSelectElement
       'Wind'
       'Earth'
       'Poison'
-      'Holy')
+      'Holy'
+    )
+    OnKeyPress = pElementKeyPress
+    Style = csDropDownList
+    TabOrder = 0
   end
   object bOK: TButton
     Left = 136
+    Height = 21
     Top = 0
     Width = 25
-    Height = 21
     Caption = 'OK'
-    TabOrder = 1
     OnClick = bOKClick
+    TabOrder = 1
   end
 end

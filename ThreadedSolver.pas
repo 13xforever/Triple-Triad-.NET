@@ -11,10 +11,10 @@ type
     Used, Our: Boolean;
     Bonus: Shortint;
     Left, Up, Right, Down: byte;
-    Element: string[1];
+    Element: byte;
   end;
   TCellInfo = record
-    Element: string[1];
+    Element: byte;
     CardID: string[2];
     Card: TCardInfo;
   end;

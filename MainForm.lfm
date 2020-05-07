@@ -1,7 +1,7 @@
 object fMain: TfMain
-  Left = 453
+  Left = 434
   Height = 656
-  Top = 175
+  Top = 144
   Width = 690
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
@@ -13,6 +13,7 @@ object fMain: TfMain
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
@@ -149,16 +150,16 @@ object fMain: TfMain
       end
       object lElement1: TLabel
         Tag = 1
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
-        Font.CharSet = RUSSIAN_CHARSET
-        Font.Color = clWindowText
+        Font.CharSet = 4
+        Font.Color = clCaptionText
         Font.Height = -27
-        Font.Name = 'Verdana'
+        Font.Name = 'Segoe UI Emoji'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -252,14 +253,14 @@ object fMain: TfMain
       end
       object lElement2: TLabel
         Tag = 2
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
-        Font.CharSet = RUSSIAN_CHARSET
-        Font.Color = clWindowText
+        Font.CharSet = 4
+        Font.Color = clCaptionText
         Font.Height = -27
         Font.Name = 'Verdana'
         Layout = tlCenter
@@ -355,13 +356,14 @@ object fMain: TfMain
       end
       object lElement3: TLabel
         Tag = 3
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
-        Font.Color = clWindowText
+        Font.CharSet = 4
+        Font.Color = clCaptionText
         Font.Height = -27
         Font.Name = 'Verdana'
         Layout = tlCenter
@@ -457,13 +459,14 @@ object fMain: TfMain
       end
       object lElement4: TLabel
         Tag = 4
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
-        Font.Color = clWindowText
+        Font.CharSet = 4
+        Font.Color = clCaptionText
         Font.Height = -27
         Font.Name = 'Verdana'
         Layout = tlCenter
@@ -559,13 +562,14 @@ object fMain: TfMain
       end
       object lElement5: TLabel
         Tag = 5
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
-        Font.Color = clWindowText
+        Font.CharSet = 4
+        Font.Color = clCaptionText
         Font.Height = -27
         Font.Name = 'Verdana'
         Layout = tlCenter
@@ -673,15 +677,16 @@ object fMain: TfMain
       end
       object lElement10: TLabel
         Tag = 10
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
+        Font.CharSet = 4
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
+        Font.Name = 'Segoe UI Emoji'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -775,15 +780,16 @@ object fMain: TfMain
       end
       object lElement9: TLabel
         Tag = 9
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
+        Font.CharSet = 4
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
+        Font.Name = 'Segoe UI Emoji'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -877,15 +883,16 @@ object fMain: TfMain
       end
       object lElement8: TLabel
         Tag = 8
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
+        Font.CharSet = 4
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
+        Font.Name = 'Segoe UI Emoji'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -979,15 +986,16 @@ object fMain: TfMain
       end
       object lElement7: TLabel
         Tag = 7
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
+        Font.CharSet = 4
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
+        Font.Name = 'Segoe UI Emoji'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1081,15 +1089,16 @@ object fMain: TfMain
       end
       object lElement6: TLabel
         Tag = 6
-        Left = 40
+        Left = 36
         Height = 33
         Top = 28
-        Width = 25
+        Width = 33
         Alignment = taCenter
         AutoSize = False
+        Font.CharSet = 4
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
+        Font.Name = 'Segoe UI Emoji'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1141,7 +1150,12 @@ object fMain: TfMain
         Width = 17
         Alignment = taCenter
         AutoSize = False
+        Font.CharSet = 4
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Segoe UI Emoji'
         ParentColor = False
+        ParentFont = False
         OnClick = SelectElement
       end
       object lEffect13: TLabel

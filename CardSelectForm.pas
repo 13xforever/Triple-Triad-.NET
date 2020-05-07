@@ -34,10 +34,7 @@ var
 implementation
 {$R *.lfm}
 uses
-  INIFiles;
-
-const
-  ToEl: array [0..8] of string[1] = ('', 'F', 'I', 'T', 'W', 'w', 'E', 'P', 'H');
+  INIFiles, MainForm;
 
 var
   myini: TINIFile;
@@ -63,12 +60,16 @@ begin
 end;
 
 procedure TfSelectCard.pCardNameChange(Sender: TObject);
+var
+  el: TElement;
 begin
   lLeft.Caption := myini.ReadString(pCardName.Text, 'Left', '');
   lUp.Caption := myini.ReadString(pCardName.Text, 'Up', '');
   lRight.Caption := myini.ReadString(pCardName.Text, 'Right', '');
   lDown.Caption := myini.ReadString(pCardName.Text, 'Down', '');
-  lElement.Caption := ToEl[myini.ReadInteger(pCardName.Text, 'Element', 0)];
+  el := ToElement[myini.ReadInteger(pCardName.Text, 'Element', 0)];
+  lElement.Caption := el.Text;
+  lElement.Font.Color := el.Color;
   bOK.Enabled := True
 end;
 

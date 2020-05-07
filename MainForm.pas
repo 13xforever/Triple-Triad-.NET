@@ -16,9 +16,7 @@ const
   clPlayer = clSkyBlue;
 
 type
-
   { TfMain }
-
   TfMain = class(TForm)
     gCardBox1: TGroupBox;
     gCardBox2: TGroupBox;
@@ -142,6 +140,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    procedure FormDestroy(Sender: TObject);
     procedure FormDockDrop(Sender: TObject; Source: TDragDockObject; X, Y: Integer);
     procedure SelectCard(Sender: TObject);
     procedure bCardEditorClick(Sender: TObject);
@@ -163,6 +162,26 @@ type
     { Public declarations }
   end;
 
+  TElement = record
+    Text: string;
+    Color: TColor;
+  end;
+
+const
+  ToElement: array [0..8] of TElement = (
+             (Text: ''; Color: clWindowText),
+             (Text: '🔥'; Color: TColor($0c63f7)), // #f7630c
+             (Text: '❄'; Color: TColor($ffea69)), // #69eaff
+             (Text: '⚡'; Color: TColor($00f1ff)), // #fff100
+             (Text: '💧'; Color: TColor($f2bc00)), // #00bcf2
+             (Text: '🌪'; Color: TColor($757575)), // #757575
+             (Text: '⛰'; Color: TColor($2e568e)), // #8e562e
+             (Text: '🟣'; Color: TColor($e46c88)), // #886ce4
+             (Text: '✨'; Color: TColor($000000))  // #000000
+  );
+  //ToElement: array [0..8] of string[1] = ('', 'F', 'I', 'T', 'W', 'w', 'E', 'P', 'H');
+  UseMT: boolean = True;
+
 var
   fMain: TfMain;
   ProposeStr, MoveToID, MoveToCardID: String;
@@ -170,7 +189,6 @@ var
   CurHandStat: THandStat;
   CurGameStat: TGameInfo;
   WriteLock: TCriticalSection;
-  UseMT: boolean;
   Threads: array [1..5] of TMyThread;
 
 implementation
@@ -180,7 +198,6 @@ uses INIFiles, CardEditorForm, CardSelectForm, ElementSelectForm, StatsForm;
 {$R manifest.res}
 
 const
-  ToElement: array [0..8] of string[1] = ('', 'F', 'I', 'T', 'W', 'w', 'E', 'P', 'H');
   CellToWord: array [1..3, 1..3] of string = (('lower left corner', 'left middle cell', 'upper left corner'),
                                               ('bottom middle cell', 'center cell', 'top middle cell'),
                                               ('lower right corner', 'middle right cell', 'upper right corner'));
@@ -198,10 +215,11 @@ var
   i, j, k: byte;
   id, tmp: string;
   tmp2: TStrings;
+  el: TElement;
 begin
   Randomize;
-  UseMT := True;
-  WriteLock := TCriticalSection.Create;
+  if WriteLock = nil then
+    WriteLock := TCriticalSection.Create;
   Thinking := false;
   for i := 1 to 9 do
     begin
@@ -219,6 +237,10 @@ begin
     end;
 {$IFDEF NEW}
   gRules.Enabled := True;
+  cElemental.Enabled := True;
+  cPlus.Enabled := True;
+  cSame.Enabled := True;
+  cSameWall.Enabled := True;
   for i := 1 to 3 do
     for j := 1 to 3 do
       begin
@@ -226,13 +248,18 @@ begin
         with CurrentGame.Field_Cell[i, j] do
           begin
             if cRandomize.Checked and cElemental.Checked and (Random > 0.66) then
-              Element := ToElement[Random(fSelectElement.pElement.Items.Count)]
+              Element := Random(fSelectElement.pElement.Items.Count)
             else
-              Element := '';
+              Element := 0;
             CardID := '';
             Card.Used := False
           end;
-        (FindComponent('lElement' + id) as TLabel).Caption := CurrentGame.Field_Cell[i, j].Element;
+        with (FindComponent('lElement' + id) as TLabel) do
+          begin
+            el := ToElement[CurrentGame.Field_Cell[i, j].Element];
+            Caption := el.Text;
+            Font.Color:= el.Color;
+          end;
         (FindComponent('Field' + id) as TGroupBox).Enabled := True
       end;
 
@@ -287,7 +314,12 @@ begin
           (FindComponent('lUp' + id) as TLabel).Caption := myini.ReadString(tmp, 'Up', '');
           (FindComponent('lRight' + id) as TLabel).Caption := myini.ReadString(tmp, 'Right', '');
           (FindComponent('lDown' + id) as TLabel).Caption := myini.ReadString(tmp, 'Down', '');
-          (FindComponent('lElement' + id) as TLabel).Caption := ToElement[myini.ReadInteger(tmp, 'Element', 0)];
+          with (FindComponent('lElement' + id) as TLabel) do
+            begin
+              el := ToElement[myini.ReadInteger(tmp, 'Element', 0)];
+              Caption := el.Text;
+              Font.Color := el.Color;
+            end;
           if i > 5 then
             begin
               with PlayerHand[i - 5] do
@@ -300,7 +332,7 @@ begin
                   Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
                   Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
                   Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
-                  Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
+                  Element := myini.ReadInteger(tmp, 'Element', 0)
                 end;
               LastHand[i - 5] := PlayerHand[i - 5];
             end
@@ -315,7 +347,7 @@ begin
                 Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
                 Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
                 Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
-                Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
+                Element := myini.ReadInteger(tmp, 'Element', 0)
               end
         end;
         tmp2.Free;
@@ -335,7 +367,12 @@ begin
           (FindComponent('lUp' + id) as TLabel).Caption := FromInt[LastHand[i].Up];
           (FindComponent('lRight' + id) as TLabel).Caption := FromInt[LastHand[i].Right];
           (FindComponent('lDown' + id) as TLabel).Caption := FromInt[LastHand[i].Down];
-          (FindComponent('lElement' + id) as TLabel).Caption := LastHand[i].Element;
+          with (FindComponent('lElement' + id) as TLabel) do
+            begin
+              el := ToElement[LastHand[i].Element];
+              Caption := el.Text;
+              Font.Color := el.Color;
+            end;
           PlayerHand[i] := LastHand[i];
           PlayerHand[i].Used := false;
           PlayerHand[i].Our := true;
@@ -350,6 +387,11 @@ begin
   CurrentGame.Cells_Used := 0;
   RefreshField
 {$ENDIF}
+end;
+
+procedure TfMain.FormDestroy(Sender: TObject);
+begin
+  WriteLock.Destroy
 end;
 
 procedure TfMain.bCardEditorClick(Sender: TObject);
@@ -390,6 +432,7 @@ var
   myini: TINIFile;
   id, tmp: string;
   i: byte;
+  el: TElement;
 begin
   fSelectCard.Left := Mouse.CursorPos.X;
   fSelectCard.Top := Mouse.CursorPos.Y;
@@ -407,7 +450,12 @@ begin
   (FindComponent('lUp' + id) as TLabel).Caption := myini.ReadString(tmp, 'Up', '');
   (FindComponent('lRight' + id) as TLabel).Caption := myini.ReadString(tmp, 'Right', '');
   (FindComponent('lDown' + id) as TLabel).Caption := myini.ReadString(tmp, 'Down', '');
-  (FindComponent('lElement' + id) as TLabel).Caption := ToElement[myini.ReadInteger(tmp, 'Element', 0)];
+  with (FindComponent('lElement' + id) as TLabel) do
+    begin
+      el := ToElement[myini.ReadInteger(tmp, 'Element', 0)];
+      Caption := el.Text;
+      Font.Color := el.Color;
+    end;
 
   if (Sender as TLabel).Tag > 5 then
     begin
@@ -422,7 +470,7 @@ begin
           Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
           Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
           Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
-          Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
+          Element := myini.ReadInteger(tmp, 'Element', 0)
         end;
       LastHand[i] := PlayerHand[i]
     end
@@ -437,7 +485,7 @@ begin
         Up := ToInt[myini.ReadString(tmp, 'Up', '1')[1]];
         Right := ToInt[myini.ReadString(tmp, 'Right', '1')[1]];
         Down := ToInt[myini.ReadString(tmp, 'Down', '1')[1]];
-        Element := ToElement[myini.ReadInteger(tmp, 'Element', 0)]
+        Element := myini.ReadInteger(tmp, 'Element', 0)
       end;
 
   myini.Free
@@ -446,14 +494,20 @@ end;
 procedure TfMain.SelectElement(Sender: TObject);
 var
   x, y: byte;
+  el: TElement;
 begin
   fSelectElement.Left := Mouse.CursorPos.X;
   fSelectElement.Top := Mouse.CursorPos.Y;
   fSelectElement.ShowModal;
   x := (Sender as TLabel).Tag div 10;
   y := (Sender as TLabel).Tag mod 10;
-  CurrentGame.Field_Cell[x, y].Element := ToElement[fSelectElement.pElement.ItemIndex];
-  (Sender as TLabel).Caption := CurrentGame.Field_Cell[x, y].Element
+  CurrentGame.Field_Cell[x, y].Element := fSelectElement.pElement.ItemIndex;
+  with (Sender as TLabel) do
+    begin
+      el := ToElement[CurrentGame.Field_Cell[x, y].Element];
+      Caption := el.Text;
+      Font.Color := el.Color;
+    end;
 end;
 
 procedure TfMain.bStatisticsClick(Sender: TObject);
@@ -478,7 +532,7 @@ begin
     begin
       Top := ((Sender as TGroupBox).ClientHeight - Height) div 2;
       Left := ((Sender as TGroupBox).ClientWidth - Width) div 2;
-      (Sender as TGroupBox).Enabled := False;
+      Enabled := False;
       _cap := StringReplace(Caption, '&&', '&', []);
 
       if Tag > 5 then
@@ -500,7 +554,7 @@ begin
               CurrentGame.Field_Cell[_x, _y].Card := OpponentHand[i];
               break
             end;
-      if CurrentGame.Field_Cell[_x, _y].Element <> '' then
+      if CurrentGame.Field_Cell[_x, _y].Element <> 0 then
         if CurrentGame.Field_Cell[_x, _y].Element = CurrentGame.Field_Cell[_x, _y].Card.Element then
           CurrentGame.Field_Cell[_x, _y].Card.Bonus := 1
         else
@@ -526,6 +580,7 @@ begin
           MessageBox(Handle, 'You won', 'Game Over', MB_OK + MB_ICONINFORMATION)
     end
 end;
+
 
 procedure TfMain.MakeMove(var game: TGameInfo; const x, y: byte; var Score: TScore; var Stat: TStat; const combo: boolean = False);
 begin
@@ -897,13 +952,14 @@ begin
         with CurrentGame.Field_Cell[i, j] do
           begin
             id := IntToStr(i * 10 + j);
-            if (cElemental.Checked) and (Element <> '') then
+            if (cElemental.Checked) and (Element <> 0) then
               if (Element = Card.Element) then
                 (FindComponent('lEffect' + id) as TLabel).Caption := '+1'
               else
                 (FindComponent('lEffect' + id) as TLabel).Caption := '-1'
             else
               (FindComponent('lEffect' + id) as TLabel).Caption := '';
+            (FindComponent('lElement' + id) as TLabel).Font.Color := ToElement[CurrentGame.Field_Cell[i, j].Element].Color;
             if Card.Our then
               (FindComponent('sCardColor' + CurrentGame.Field_Cell[i, j].CardID) as TShape).Brush.Color := clPlayer
             else
@@ -1025,8 +1081,11 @@ begin
 
   gCardBox1.Enabled := False;
   gCardBox2.Enabled := False;
-  gFieldBox.Enabled := False;
   gRules.Enabled := False;
+  cElemental.Enabled := False;
+  cPlus.Enabled := False;
+  cSame.Enabled := False;
+  cSameWall.Enabled := False;
   bMove1.Enabled := False;
   bMove2.Enabled := False;
   bReset.Enabled := False;
@@ -1077,8 +1136,11 @@ begin
 
   gCardBox1.Enabled := True;
   gCardBox2.Enabled := True;
-  gFieldBox.Enabled := True;
   gRules.Enabled := True;
+  cElemental.Enabled := True;
+  cPlus.Enabled := True;
+  cSame.Enabled := True;
+  cSameWall.Enabled := True;
   bMove1.Enabled := True;
   bMove2.Enabled := True;
   bReset.Enabled := True;
@@ -1101,8 +1163,11 @@ begin
 
   gCardBox1.Enabled := False;
   gCardBox2.Enabled := False;
-  gFieldBox.Enabled := False;
   gRules.Enabled := False;
+  cElemental.Enabled := False;
+  cPlus.Enabled := False;
+  cSame.Enabled := False;
+  cSameWall.Enabled := False;
   bMove1.Enabled := False;
   bMove2.Enabled := False;
   bReset.Enabled := False;
@@ -1157,8 +1222,11 @@ begin
 
   gCardBox1.Enabled := True;
   gCardBox2.Enabled := True;
-  gFieldBox.Enabled := True;
   gRules.Enabled := True;
+  cElemental.Enabled := True;
+  cPlus.Enabled := True;
+  cSame.Enabled := True;
+  cSameWall.Enabled := True;
   bMove1.Enabled := True;
   bMove2.Enabled := True;
   bReset.Enabled := True;
