@@ -1,44 +1,42 @@
 object fCardEditor: TfCardEditor
-  Left = 254
-  Top = 157
+  Left = 531
+  Height = 89
+  Top = 184
+  Width = 249
   BorderStyle = bsToolWindow
   Caption = 'Card Editor'
   ClientHeight = 89
   ClientWidth = 249
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
-  Font.Style = []
   FormStyle = fsStayOnTop
-  Position = poScreenCenter
   OnHide = FormHide
   OnShow = FormShow
-  PixelsPerInch = 96
+  Position = poScreenCenter
+  LCLVersion = '2.0.6.0'
   object pName: TEdit
     Left = 8
+    Height = 21
     Top = 8
     Width = 161
-    Height = 21
     TabOrder = 5
   end
   object bAddCard: TButton
     Left = 176
+    Height = 73
     Top = 8
     Width = 65
-    Height = 73
     Caption = 'Reload'
-    TabOrder = 6
     OnClick = bAddCardClick
+    TabOrder = 6
   end
   object pElement: TComboBox
     Left = 64
+    Height = 21
     Top = 48
     Width = 105
-    Height = 21
     ItemHeight = 13
-    TabOrder = 4
     Items.Strings = (
       'Fire'
       'Ice'
@@ -47,45 +45,47 @@ object fCardEditor: TfCardEditor
       'Wind'
       'Earth'
       'Poison'
-      'Holy')
+      'Holy'
+    )
+    TabOrder = 4
   end
   object pRight: TEdit
     Left = 40
+    Height = 17
     Top = 48
     Width = 17
-    Height = 17
     AutoSize = False
-    CharCase = ecUpperCase
+    CharCase = ecUppercase
     MaxLength = 1
     TabOrder = 2
   end
   object pUp: TEdit
     Left = 24
+    Height = 17
     Top = 32
     Width = 17
-    Height = 17
     AutoSize = False
-    CharCase = ecUpperCase
+    CharCase = ecUppercase
     MaxLength = 1
     TabOrder = 1
   end
   object pLeft: TEdit
     Left = 8
+    Height = 17
     Top = 48
     Width = 17
-    Height = 17
     AutoSize = False
-    CharCase = ecUpperCase
+    CharCase = ecUppercase
     MaxLength = 1
     TabOrder = 0
   end
   object pDown: TEdit
     Left = 24
+    Height = 17
     Top = 64
     Width = 17
-    Height = 17
     AutoSize = False
-    CharCase = ecUpperCase
+    CharCase = ecUppercase
     MaxLength = 1
     TabOrder = 3
   end

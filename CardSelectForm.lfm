@@ -1,76 +1,86 @@
 object fSelectCard: TfSelectCard
-  Left = 289
-  Top = 158
+  Left = 397
+  Height = 73
+  Top = 193
+  Width = 137
   BorderIcons = [biMinimize, biMaximize]
   BorderStyle = bsToolWindow
   Caption = 'Card Select'
   ClientHeight = 73
   ClientWidth = 137
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
-  Font.Style = []
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  PixelsPerInch = 96
+  LCLVersion = '2.0.6.0'
   object lLeft: TLabel
     Left = 0
+    Height = 17
     Top = 40
     Width = 17
-    Height = 17
     AutoSize = False
+    ParentColor = False
   end
   object lup: TLabel
     Left = 16
+    Height = 17
     Top = 24
     Width = 17
-    Height = 17
     AutoSize = False
+    ParentColor = False
   end
   object lRight: TLabel
     Left = 32
+    Height = 17
     Top = 40
     Width = 17
-    Height = 17
     AutoSize = False
+    ParentColor = False
   end
   object lDown: TLabel
     Left = 16
+    Height = 17
     Top = 56
     Width = 17
-    Height = 17
     AutoSize = False
+    ParentColor = False
   end
   object lElement: TLabel
     Left = 16
+    Height = 17
     Top = 40
     Width = 17
-    Height = 17
     AutoSize = False
+    Font.CharSet = 4
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI Emoji'
+    ParentColor = False
+    ParentFont = False
   end
   object pCardName: TComboBox
     Left = 0
+    Height = 21
     Top = 0
     Width = 137
-    Height = 21
-    Style = csDropDownList
     ItemHeight = 13
-    Sorted = True
-    TabOrder = 0
+    Items.Strings = (
+      'Unknown'
+    )
     OnChange = pCardNameChange
     OnKeyPress = pCardNameKeyPress
-    Items.Strings = (
-      'Unknown')
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 0
   end
   object bOK: TButton
     Left = 56
+    Height = 49
     Top = 24
     Width = 81
-    Height = 49
     Caption = 'OK'
-    TabOrder = 1
     OnClick = bOKClick
+    TabOrder = 1
   end
 end

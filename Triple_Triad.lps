@@ -9,7 +9,7 @@
         <Filename Value="Triple_Triad.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
       </Unit0>
       <Unit1>
         <Filename Value="MainForm.pas"/>
@@ -17,10 +17,9 @@
         <ComponentName Value="fMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="163"/>
         <CursorPos X="61" Y="175"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,10 +29,11 @@
         <ComponentName Value="fCardEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="10"/>
         <CursorPos X="21" Y="8"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="CardSelectForm.pas"/>
@@ -41,10 +41,10 @@
         <ComponentName Value="fSelectCard"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="53"/>
         <CursorPos X="17" Y="72"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -53,10 +53,10 @@
         <ComponentName Value="fSelectElement"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="22"/>
         <CursorPos X="60" Y="35"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -65,27 +65,30 @@
         <ComponentName Value="fStat"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="55"/>
         <CursorPos X="21" Y="8"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="ThreadedSolver.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="3"/>
         <CursorPos X="18" Y="17"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\Programs\lazarus\lcl\graphics.pp"/>
         <UnitName Value="Graphics"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="388"/>
         <CursorPos X="3" Y="66"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit7>
     </Units>

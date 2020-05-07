@@ -11,7 +11,6 @@ object fSelectElement: TfSelectElement
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnShow = FormShow
   LCLVersion = '2.0.6.0'
   object pElement: TComboBox

@@ -11,7 +11,6 @@ object fMain: TfMain
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -19,29 +18,27 @@ object fMain: TfMain
   LCLVersion = '2.0.6.0'
   object lScore1: TLabel
     Left = 136
-    Height = 49
+    Height = 64
     Top = 584
-    Width = 41
+    Width = 64
     Alignment = taCenter
     AutoSize = False
     Caption = '5'
     Font.Color = clWindowText
-    Font.Height = -43
-    Font.Name = 'Verdana'
+    Font.Height = -48
     ParentColor = False
     ParentFont = False
   end
   object lScore2: TLabel
-    Left = 496
-    Height = 49
+    Left = 492
+    Height = 64
     Top = 584
-    Width = 41
+    Width = 64
     Alignment = taCenter
     AutoSize = False
     Caption = '5'
     Font.Color = clWindowText
-    Font.Height = -43
-    Font.Name = 'Verdana'
+    Font.Height = -48
     ParentColor = False
     ParentFont = False
   end
@@ -50,8 +47,11 @@ object fMain: TfMain
     Height = 49
     Top = 536
     Width = 193
-    Caption = '<-- Make a move (AI)'
+    Caption = '◀ Make a move (AI)'
+    Font.Color = clWindowText
+    Font.Height = -11
     OnClick = bMove1Click
+    ParentFont = False
     TabOrder = 2
   end
   object gCardBox1: TGroupBox
@@ -64,6 +64,9 @@ object fMain: TfMain
     ClientHeight = 622
     ClientWidth = 117
     DockSite = True
+    Font.Color = clWindowText
+    Font.Height = -11
+    ParentFont = False
     TabOrder = 5
     object gCard1: TGroupBox
       Tag = 1
@@ -96,7 +99,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
         OnClick = SelectCard
@@ -111,7 +113,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -127,7 +128,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -143,7 +143,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
         OnClick = SelectCard
@@ -197,7 +196,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -213,7 +211,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -229,7 +226,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -245,7 +241,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -300,7 +295,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -316,7 +310,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -332,7 +325,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -348,7 +340,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -403,7 +394,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -419,7 +409,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -435,7 +424,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -451,7 +439,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -506,7 +493,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -522,7 +508,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -538,7 +523,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -554,7 +538,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -589,6 +572,9 @@ object fMain: TfMain
     ClientHeight = 622
     ClientWidth = 117
     DockSite = True
+    Font.Color = clWindowText
+    Font.Height = -11
+    ParentFont = False
     TabOrder = 6
     object gCard10: TGroupBox
       Tag = 10
@@ -621,7 +607,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -637,7 +622,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -653,7 +637,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -669,7 +652,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -724,7 +706,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -740,7 +721,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -756,7 +736,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -772,7 +751,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -827,7 +805,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -843,7 +820,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -859,7 +835,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -875,7 +850,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -930,7 +904,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -946,7 +919,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -962,7 +934,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -978,7 +949,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1033,7 +1003,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1049,7 +1018,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1065,7 +1033,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1081,7 +1048,6 @@ object fMain: TfMain
         AutoSize = False
         Font.Color = clWindowText
         Font.Height = -27
-        Font.Name = 'Verdana'
         Layout = tlCenter
         ParentColor = False
         ParentFont = False
@@ -1114,6 +1080,9 @@ object fMain: TfMain
     Caption = 'Play Field'
     ClientHeight = 425
     ClientWidth = 416
+    Font.Color = clWindowText
+    Font.Height = -11
+    ParentFont = False
     TabOrder = 7
     object Field13: TGroupBox
       Tag = 13
@@ -1138,7 +1107,6 @@ object fMain: TfMain
         Caption = '13'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1166,7 +1134,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field23: TGroupBox
@@ -1201,7 +1172,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
       object Label8: TLabel
         Left = 16
@@ -1213,7 +1187,6 @@ object fMain: TfMain
         Caption = '23'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1241,7 +1214,6 @@ object fMain: TfMain
         Caption = '33'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1264,7 +1236,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field12: TGroupBox
@@ -1313,7 +1288,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field22: TGroupBox
@@ -1362,7 +1340,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field32: TGroupBox
@@ -1388,7 +1369,6 @@ object fMain: TfMain
         Caption = '32'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1411,7 +1391,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field11: TGroupBox
@@ -1437,7 +1420,6 @@ object fMain: TfMain
         Caption = '11'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1460,7 +1442,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field21: TGroupBox
@@ -1486,7 +1471,6 @@ object fMain: TfMain
         Caption = '21'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1509,7 +1493,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
     object Field31: TGroupBox
@@ -1535,7 +1522,6 @@ object fMain: TfMain
         Caption = '31'
         Font.Color = clBtnHighlight
         Font.Height = -64
-        Font.Name = 'Verdana'
         ParentColor = False
         ParentFont = False
       end
@@ -1558,7 +1544,10 @@ object fMain: TfMain
         Width = 25
         Alignment = taCenter
         AutoSize = False
+        Font.Color = clWindowText
+        Font.Height = -11
         ParentColor = False
+        ParentFont = False
       end
     end
   end
@@ -1566,54 +1555,72 @@ object fMain: TfMain
     Left = 136
     Height = 73
     Top = 456
-    Width = 193
+    Width = 208
     Caption = 'Rules'
     ClientHeight = 55
-    ClientWidth = 189
+    ClientWidth = 204
+    Font.Color = clWindowText
+    Font.Height = -11
+    ParentFont = False
     TabOrder = 3
     object cElemental: TCheckBox
       Left = 8
       Height = 19
       Top = 0
-      Width = 66
+      Width = 70
       Caption = 'Elemental'
+      Font.Color = clWindowText
+      Font.Height = -11
       OnClick = cElementalClick
+      ParentFont = False
       TabOrder = 0
     end
     object cSame: TCheckBox
-      Left = 96
+      Left = 112
       Height = 19
       Top = 0
       Width = 47
       Caption = 'Same'
+      Font.Color = clWindowText
+      Font.Height = -11
       OnClick = cSameClick
+      ParentFont = False
       TabOrder = 1
     end
     object cPlus: TCheckBox
       Left = 8
       Height = 19
       Top = 24
-      Width = 40
+      Width = 41
       Caption = 'Plus'
+      Font.Color = clWindowText
+      Font.Height = -11
+      ParentFont = False
       TabOrder = 2
     end
     object cSameWall: TCheckBox
-      Left = 96
+      Left = 112
       Height = 19
       Top = 24
-      Width = 71
+      Width = 73
       Caption = 'Same Wall'
+      Font.Color = clWindowText
+      Font.Height = -11
       OnClick = cSameWallClick
+      ParentFont = False
       TabOrder = 3
     end
   end
   object bMove2: TButton
-    Left = 344
+    Left = 371
     Height = 49
     Top = 536
     Width = 185
-    Caption = 'Find optimal move -->'
+    Caption = 'Find optimal move ▶'
+    Font.Color = clWindowText
+    Font.Height = -11
     OnClick = bMove2Click
+    ParentFont = False
     TabOrder = 1
   end
   object bReset: TButton
@@ -1622,33 +1629,45 @@ object fMain: TfMain
     Top = 608
     Width = 97
     Caption = 'New Game'
+    Font.Color = clWindowText
+    Font.Height = -11
     OnClick = FormCreate
+    ParentFont = False
     TabOrder = 0
   end
   object bStatistics: TButton
-    Left = 440
+    Left = 459
     Height = 25
     Top = 464
     Width = 97
     Caption = 'Statistics'
+    Font.Color = clWindowText
+    Font.Height = -11
     OnClick = bStatisticsClick
+    ParentFont = False
     TabOrder = 4
   end
   object cRandomize: TCheckBox
     Left = 384
     Height = 19
     Top = 608
-    Width = 73
+    Width = 77
     Caption = 'Randomize'
+    Font.Color = clWindowText
+    Font.Height = -11
+    ParentFont = False
     TabOrder = 8
   end
   object bCardEditor: TButton
-    Left = 336
+    Left = 352
     Height = 25
     Top = 464
     Width = 97
     Caption = 'Add New Card'
+    Font.Color = clWindowText
+    Font.Height = -11
     OnClick = bCardEditorClick
+    ParentFont = False
     TabOrder = 9
   end
 end
