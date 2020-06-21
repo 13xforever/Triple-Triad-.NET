@@ -276,6 +276,7 @@ begin
             ManualDock(gCardBox2);
           Top := 16 + ((j - 1) mod 5) * (Height + 8);
           Left := 8;
+          Enabled := True;
         end;
       (FindComponent('lLeft' + id) as TLabel).Caption := '';
       (FindComponent('lUp' + id) as TLabel).Caption := '';

@@ -60,6 +60,9 @@
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="bin\Triple_Triad_MT64"/>
+          </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
             <UnitOutputDirectory Value="bin"/>
@@ -71,6 +74,9 @@
           </Parsing>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
+            <RelocatableUnit Value="True"/>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="win64"/>
             <Optimizations>
               <OptimizationLevel Value="3"/>
             </Optimizations>
